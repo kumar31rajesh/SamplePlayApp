@@ -1,0 +1,6 @@
+target*
+test*
+.target*
+logs*
+project*
+css*
