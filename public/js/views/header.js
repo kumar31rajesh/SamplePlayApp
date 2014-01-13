@@ -1,5 +1,5 @@
 window.HeaderView = Backbone.View.extend({
-	
+	className:"navbar",
     initialize: function () {
         this.render();
     },
@@ -11,7 +11,7 @@ window.HeaderView = Backbone.View.extend({
 
     selectMenuItem: function (menuItem) {
     	
-        $('.nav li a').removeClass('active-link');
+        $('.nav li').removeClass('active-link');
         if (menuItem) {
        
             $('#'+menuItem).addClass('active-link');

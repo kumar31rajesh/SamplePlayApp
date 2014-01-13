@@ -12,63 +12,6 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 */
 
-var Tree = Backbone.Tree = Backbone.Model.extend({
-  defaults: {
-    id: 0,
-    label: "Default"
-  },
-
-  initialize: function() {
-    if (!this.get("children")) this.set("children", new Backbone.Trees());
-  },
-
-  getChildrenIds: function() {
-    if (!this.hasChildren()) return [this.id];
-
-    var modelsId = this.get("children").map(function(child) {
-      if (child.hasChildren())
-        return child.getChildrenIds();
-      else
-        return child.id;
-    }, this);
-
-    return _.flatten(modelsId);
-  },
-
-  // Helpers
-  countLeaves: function() {
-    return this._countLeavesFor($.proxy(this._inc, this));
-  },
-
-  hasChildren: function() {
-    return this.get("children").size() > 0;
-  },
-
-  // Internals methods
-  _countLeavesFor: function(callback) {
-    if (!this.hasChildren()) return callback(this, 0);
-    return this.get("children").reduce(function(total, child) {
-      if (child.hasChildren())
-        return total + child._countLeavesFor(callback);
-      else
-        return total + callback(child, total);
-    }, 0, this);
-  },
-
-  // Callbacks
-  _inc: function() { return 1; }
-
-});
-
-var Trees = Backbone.Trees = Backbone.Collection.extend({
-  model: Tree,
-  getChildrenIds: function() {
-    var modelsId = this.map(function(model) {
-      return model.getChildrenIds();
-    }, this);
-    return _.flatten(modelsId);
-  }
-});
 /*
 
 Copyright (C) 2013 Acquisio Inc. V0.1.1

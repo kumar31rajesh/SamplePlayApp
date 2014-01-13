@@ -4,7 +4,9 @@ var AppRouter = Backbone.Router.extend({
     	"":"login",
     	"login":"login",
     	"home":"homepage",
-    	"home/details/:id":"detailsView"
+    	"home/details/:id":"detailsView",
+    	"products":"displayProducts",
+    	"products/source/:id":"displayProductSource"
     },
 
     initialize: function () {
@@ -16,83 +18,27 @@ var AppRouter = Backbone.Router.extend({
     },
     detailsView: function (id) {
     	
-    	
-    	$.ajax({
-    	    url: "/api/details/"+id,
-    	    type: "GET",
-    	    dataType: "json",
-    	    success: function(response) {
-    	    	
-    	    	$('#result').html( '<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered" id="example"></table>' );
-    	        $('#example').dataTable( {
-    	            "aaData": response.data,
-    	            "aoColumns": response.columns
-    	        } );   
-    	        
-    	    },
-    	    error: function(xhr) {
-    	    	alert(xhr);
-    	    }
-    	});
-   /*
-    	var loanmodel=new LoanDetails();
-    	loanmodel.searchTerm=id ;
-    	
-    	loanmodel.fetch({
-            success: function (response) {
-                console.log("sucess"+JSON.stringify(response.columns));
-               
-                //$("#result").html("<H1>Selected Item id:"+id+"</H1>"); 
-                $("#result").html((new GridView()).render({collection:response}).el); 
-                
-                var columns = [{
-            		  name: "id", // The key of the model attribute
-            		  label: "ID", // The name to display in the header
-            		  editable: false,
-            		  cell: "string"
-            		}, {
-            		  name: "name",
-            		  label: "Name",
-            		  editable: false,
-            		  cell: "string"
-            		}, {
-              		  name: "amount",
-                		  label: "Amount",
-                		editable: false,
-                		cell: "string"
-                		}, {
-              		  name: "age",
-                		  label: "Age",
-                		  editable: false,
-                		  cell: "string"
-                		}, {
-              		  name: "salary",
-                		  label: "Salary",
-                		  editable: false,
-                		  cell: "string"
-                		}];
-                
-              //Initialize a new Grid instance
-              	var grid = new Backgrid.Grid({
-              	  columns: columns,
-              	  collection: response
-              	});
-                
-                var grid = new Backgrid.Grid({
-                	  columns: columns,
-                	  collection: response.data
-                	});
-              	
-              	
-              	
-              	$("#result").html(grid.render().$el);
-                
-                
-            },
-            error:function(response){
-            	console.log("error"+response);
-            }
-        });*/
+    	$('#page-content-wrapper').html( '<div id="filters_wrappers"></div> <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered" id="example"></table>' );
+        var otable=$('#example').dataTable( {
+        	"sScrollY": "280px",
+    		"bPaginate": false,
+    		"bProcessing": true,
+    		"bServerSide": true,
+    		"aoColumns": [
+                          { "mDataProp": "id" ,"sTitle":"ID"},
+                          { "mDataProp": "name" ,"sTitle":"NAME"},
+                          { "mDataProp": "amount" ,"sTitle":"AMOUNT"},
+                          { "mDataProp": "age" ,"sTitle":"AGE"},
+                          { "mDataProp": "place","sTitle":"PLACE" },
+                          { "mDataProp": "salary","sTitle":"SALARY" }
+                      ],
+             "sAjaxSource": "/api/details/"+id,
+             "sDom": "frtiS",
+             "oScroller": {
+                 "displayBuffer": 10
+               }
+        } ); 
+ 
     	
     }
     ,
@@ -105,12 +51,25 @@ var AppRouter = Backbone.Router.extend({
     homepage: function() {
     	
            $(".content").html((new HomeView).el);
+           this.headerView.selectMenuItem('home');
           
+	},
+	displayProducts:function(){
+		this.products=new Products([new Product({name:'Product1',id:'0'}),new Product({name:'Product2',id:'1'})]);
+		//this.productview=new ProductView({collection:this.products});
+		console.log((new ProductView({collection:this.products})).render().el);
+		$(".content").html((new ProductView({collection:this.products})).render().el);
+		this.headerView.selectMenuItem('products');
+	},
+	displayProductSource:function(id){
+		$('prodName').val=id;
 	}
   
 });
 
-utils.loadTemplate(['HeaderView','LoginView','FooterView','HomeView'], function() {
+utils.loadTemplate(['HeaderView','LoginView','FooterView','HomeView','ProductView'], function() {
     app = new AppRouter();
     Backbone.history.start();
 });
+
+

@@ -47,17 +47,14 @@ window.LoginView = Backbone.View.extend({
             success: function(model, response) {
                 console.log('success! ' + response.status);
                 if(response.status== 'home'){
-                	
-                	//this.headerView = new HeaderView({model:headermodel}); 
+
                 	var headermodel=new HeaderModel();
                 	headermodel.set("username",model.get("username"));
                 	headermodel.set("isLogedIn",true);
                 	var headerview=new HeaderView({model:headermodel}) ;
                 	
                 	$('#header').html(headerview.el);
-                	headerview.selectMenuItem('home');
-                
-                app.navigate('#home', true);	  	
+                	app.navigate('#home', true);	  	
                 
                 }
                 else
