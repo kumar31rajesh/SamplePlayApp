@@ -56,9 +56,8 @@ var AppRouter = Backbone.Router.extend({
 	},
 	displayProducts:function(){
 		this.products=new Products([new Product({name:'Product1',id:'0'}),new Product({name:'Product2',id:'1'})]);
-		//this.productview=new ProductView({collection:this.products});
-		console.log((new ProductView({collection:this.products})).render().el);
-		$(".content").html((new ProductView({collection:this.products})).render().el);
+	
+		$(".content").html((new ProductView({collection:this.products})).el);
 		this.headerView.selectMenuItem('products');
 	},
 	displayProductSource:function(id){
