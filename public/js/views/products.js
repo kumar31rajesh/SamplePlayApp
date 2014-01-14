@@ -24,12 +24,14 @@ window.ProductView= Backbone.View.extend({
     },
     render: function() {
         that = this;
+        
+        $(this.el).html(this.template());
      
         this.collection.each(function(model) {
         	
-        	console.log("123123"+JSON.stringify(model));
             $(that.el).append(new ProductItemView({model: model.toJSON()}).el);
         });
+        this.$('#sidebar-content').html(that.el);
         return this;
     }
     

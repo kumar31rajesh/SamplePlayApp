@@ -1,0 +1,52 @@
+.bbtree-folder{
+    margin-left: 1.5em;
+    overflow: hidden;
+    width: 300px;
+}
+
+.bbtree-folder-root{
+    margin-left: .18em;
+}
+
+.bbtree-leaf{
+    margin-left: 1.5em;
+    /*cursor: pointer;*/
+    overflow: hidden;
+    width: 300px;
+}
+
+.bbtree-leaf-icon{
+    background: url('/static/img/BBTree/file.png') 50% 50% no-repeat;
+    width: 16px;
+    height: 16px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.bbtree-leaf-name{
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.bbtree-folder-icon{
+    background: url('/static/img/BBTree/tree-icons-sprite.png') -54px 0 no-repeat;
+    width: 18px;
+    height: 18px;
+    display: inline-block;
+    vertical-align: middle;
+    cursor: pointer;
+}
+
+.bbtree-folder-icon-open{
+    background-position: -72px 0;
+}
+
+.bbtree-folder-name{
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.ui-draggable-helper{
+    display: inline;
+    width: 200px;
+}
