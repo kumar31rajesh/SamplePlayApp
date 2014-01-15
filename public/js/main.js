@@ -3,6 +3,7 @@ var AppRouter = Backbone.Router.extend({
     routes: {
     	"":"login",
     	"login":"login",
+    	"signup":"validateAdmin",
     	"home":"homepage",
     	"home/details/:id":"detailsView",
     	"products":"displayProducts",
@@ -18,14 +19,33 @@ var AppRouter = Backbone.Router.extend({
     },
     detailsView: function (id) {
     	
-    	$('#page-content-wrapper').html( '<div id="filters_wrappers"></div> <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered" id="example"></table>' );
+    	
+    	  $.ajax({
+              type: "GET", 
+              url: "/api/details/"+id, 
+              dataType:"json",
+              success: function (response) {
+            	  
+            	  $('#page-content-wrapper').html( '<div id="filters_wrappers"></div> <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered" id="example"></table>' );
+                  var otable=$('#example').dataTable({
+                	 "aaData":response.aaData,
+              		 "aoColumns":response.aoColumns
+                  }); 
+                  
+              },
+              error: function(){
+            	  
+              }
+          });
+    	
+    /*	$('#page-content-wrapper').html( '<div id="filters_wrappers"></div> <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered" id="example"></table>' );
         var otable=$('#example').dataTable( {
         	"sScrollY": "280px",
     		"bPaginate": false,
     		"bProcessing": true,
     		"bServerSide": true,
-    		"aoColumns": [
-                          { "mDataProp": "id" ,"sTitle":"ID"},
+    		  "aoColumns": [
+                         { "mDataProp": "id" ,"sTitle":"ID"},
                           { "mDataProp": "name" ,"sTitle":"NAME"},
                           { "mDataProp": "amount" ,"sTitle":"AMOUNT"},
                           { "mDataProp": "age" ,"sTitle":"AGE"},
@@ -37,13 +57,17 @@ var AppRouter = Backbone.Router.extend({
              "oScroller": {
                  "displayBuffer": 10
                }
-        } ); 
+        } ); */
  
     	
+    },
+    validateAdmin:function(){
+    	this.authmodel=new Authentication();
+    	this.adminAuthenticate=new AdminAuthenticationView({model:this.authmodel});
+    	$(".content").html(this.adminAuthenticate.el); 
     }
     ,
     login: function() {
-  
     	this.authmodel=new Authentication();
     	this.loginview=new LoginView({model:this.authmodel});
     	$(".content").html(this.loginview.el);  
@@ -56,7 +80,6 @@ var AppRouter = Backbone.Router.extend({
 	},
 	displayProducts:function(){
 		this.products=new Products([new Product({name:'Product1',id:'0'}),new Product({name:'Product2',id:'1'})]);
-	
 		$(".content").html((new ProductView({collection:this.products})).el);
 		this.headerView.selectMenuItem('products');
 	},
@@ -66,7 +89,7 @@ var AppRouter = Backbone.Router.extend({
   
 });
 
-utils.loadTemplate(['HeaderView','LoginView','FooterView','HomeView','ProductView'], function() {
+utils.loadTemplate(['HeaderView','LoginView','FooterView','HomeView','ProductView','AdminAuthenticationView','SignUpView'], function() {
     app = new AppRouter();
     Backbone.history.start();
 });
