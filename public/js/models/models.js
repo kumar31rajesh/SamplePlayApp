@@ -17,7 +17,8 @@ defaults: {
 	message:"Sign In to Analytics",
     username: "",
     password: "",
-    domain:""
+    domain:"",
+    email:""
 },
 validateItem: function (key) {
     return (this.validators[key]) ? this.validators[key](this.get(key)) : {isValid: true};
@@ -39,6 +40,8 @@ validateAll: function () {
 }
 
 });
+
+
 
 window.HeaderModel= Backbone.Model.extend({	
 
@@ -138,7 +141,8 @@ window.Product= Backbone.Model.extend({
 
 	defaults: {
 	    id: 0,
-	    name: "Product1"
+	    name: "Product1",
+	    children:[]
 	  }
 
 	  });

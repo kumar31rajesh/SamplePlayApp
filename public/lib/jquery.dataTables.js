@@ -1177,10 +1177,14 @@
 				{
 					nTh = oSettings.aoColumns[i].nTh;
 					nTh.setAttribute('role', 'columnheader');
+					nTh.setAttribute('title', oSettings.aoColumns[i].sInfo);
+					
+					
 					if ( oSettings.aoColumns[i].bSortable )
 					{
 						nTh.setAttribute('tabindex', oSettings.iTabIndex);
 						nTh.setAttribute('aria-controls', oSettings.sTableId);
+					
 					}
 		
 					if ( oSettings.aoColumns[i].sClass !== null )
@@ -1205,6 +1209,8 @@
 					nTh = oSettings.aoColumns[i].nTh;
 					nTh.innerHTML = oSettings.aoColumns[i].sTitle;
 					nTh.setAttribute('tabindex', '0');
+					nTh.setAttribute('title', oSettings.aoColumns[i].sInfo);
+					console.log(nTh);
 					
 					if ( oSettings.aoColumns[i].sClass !== null )
 					{

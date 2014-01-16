@@ -17,21 +17,27 @@ var AppRouter = Backbone.Router.extend({
         $('#header').html(this.headerView.el);
         $('.page-footer').html(this.footerView.el);        
     },
-    detailsView: function (id) {
-    	
-    	
+    detailsView: function (id) {	
     	  $.ajax({
               type: "GET", 
               url: "/api/details/"+id, 
               dataType:"json",
               success: function (response) {
             	  
-            	  $('#page-content-wrapper').html( '<div id="filters_wrappers"></div> <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered" id="example"></table>' );
+            	  $('#page-content-wrapper').html( '<div id="filters_wrappers"></div> <table  cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered" id="example"></table>' );
                   var otable=$('#example').dataTable({
-                	 "aaData":response.aaData,
-              		 "aoColumns":response.aoColumns
-                  }); 
-                  
+                	 "sScrollY": "380px",
+                	 "sScrollX": "965px",
+                	 "bProcessing": true,
+             		 "bServerSide": true,
+              		 "bPaginate": false,
+              		 "aoColumns":response.aoColumns,
+              		 "sAjaxSource": "/api/details/"+id,
+                     "sDom": "frtiS",
+                     "oScroller": {
+                        "displayBuffer": 10
+                      }
+                  });  
               },
               error: function(){
             	  
@@ -79,7 +85,7 @@ var AppRouter = Backbone.Router.extend({
           
 	},
 	displayProducts:function(){
-		this.products=new Products([new Product({name:'Product1',id:'0'}),new Product({name:'Product2',id:'1'})]);
+		this.products=new Products([new Product({name:'Product1',id:'0',children:new Products([new Product({name:'Prod1-Child1',id:'01'}),new Product({name:'Prod1-Child2',id:'02'})]) }),new Product({name:'Product2',id:'1'})]);
 		$(".content").html((new ProductView({collection:this.products})).el);
 		this.headerView.selectMenuItem('products');
 	},
