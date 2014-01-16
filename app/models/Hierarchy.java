@@ -11,7 +11,7 @@ public class Hierarchy {
 	@Id
 	protected ObjectId _id;
 	private String label ;
-	private int id ;
+	private String id;
 	
 	public ObjectId get_id() {
 		return _id;
@@ -25,10 +25,12 @@ public class Hierarchy {
 	public void setLabel(String label) {
 		this.label = label;
 	}
-	public int getId() {
+
+	public String getId() {
 		return id;
 	}
-	public void setId(int id) {
+
+	public void setId(String id) {
 		this.id = id;
 	}
 	

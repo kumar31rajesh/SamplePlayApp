@@ -21,5 +21,5 @@ POST /api/authenticate     controllers.AppController.authentiate()
 POST /api/validateAdmin     controllers.AppController.validateAdmin()
 POST /api/saveUser     controllers.AppController.saveUserDetails()
 
-GET  /api/details/:id     controllers.AppController.details(id :Long)
+GET  /api/details/:id     controllers.AppController.details(id :String)
 GET  /api/hierarchy     controllers.AppController.getHirarchy()

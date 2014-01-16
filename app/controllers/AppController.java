@@ -1,25 +1,25 @@
 package controllers;
 
 
-import models.Hierarchy;
-import models.LoanData;
-
-import com.fasterxml.jackson.databind.JsonNode;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-
 import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.List;
 
-
-import filters.LoanDetails;
-import filters.LoginAuthentication;
+import models.Hierarchy;
 import play.mvc.Controller;
 import play.mvc.Result;
 
+import com.cerrid.analytics.service.ReportingService;
+import com.cerrid.model.accessor.exception.DBQueryExecuteException;
+import com.cerrid.model.collections.DataMart;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
+import filters.LoanDetails;
+import filters.LoginAuthentication;
+
 public class AppController extends Controller {
-	
 	
 	public static Result authentiate() {
 		
@@ -36,65 +36,35 @@ public class AppController extends Controller {
 		
 	}
 	
-public static Result details(Long id) {
-		
-		System.out.println("details");
-		
-		List<LoanData> ldata=LoanDetails.getLoanDetails(id);
-		
-
-		String jsonRepresentation = "";
-	
-		if(ldata!=null){
-		Gson gson = new GsonBuilder().excludeFieldsWithModifiers(Modifier.PROTECTED).create();
-		jsonRepresentation= gson.toJson(ldata);
+	public static Result details(String datasetId) {
+		String dataTableData = null;
+		try {
+			dataTableData = ReportingService.getDataTableData(datasetId);
+		} catch (DBQueryExecuteException e) {
+			e.printStackTrace();
 		}
-
-		
-		ArrayList al=new ArrayList();
-		al.add("id");
-		al.add("name");
-		al.add("amount");
-		al.add("age");
-		al.add("salary");
-		
-		String info="Custome Column Info" ;
-		
-		String col="[";
-		boolean initial = false;
-		for(int i=0;i<al.size();i++){
-			initial = i == al.size()-1 ? true: false;
-			col=col+"{\"mData\":\""+al.get(i)+"\",\"sTitle\":\""+al.get(i).toString().toUpperCase()+"\",\"sInfo\":\""+info+"\"}" ;
-			if(!initial){
-				col += ",";
-			}
-			
-		}
-		col=col+"]";
-	
-		
-		String echo;
-		if(request().getQueryString("sEcho")==null)
-			echo="0";
-		else
-			echo=request().getQueryString("sEcho");
-		
-		
-		return ok("{\"sEcho\":"+echo+",\"aoColumns\":" +col+",\"iTotalRecords\":"+ldata.size()+",\"iTotalDisplayRecords\":"+request().getQueryString("iDisplayLength")+",\"aaData\":"+jsonRepresentation+"}");
-		//return ok("{\"sEcho\":\"1\",\"iTotalRecords\":"+ldata.size()+",\"iTotalDisplayRecords\":"+5+",\"aoColumns\":"+col+",\"aaData\":"+jsonRepresentation+"}");
-		//return ok(jsonRepresentation);
-
-		
+		return ok(dataTableData);
 	}
 
 public static Result getHirarchy(){
 	
-	List<Hierarchy>  hierarchy=LoanDetails.getHirarchy() ;
+		List<DataMart> dataMarts = LoanDetails.getHirarchy();
+		List<Hierarchy> hiearchy = new ArrayList<>();
+		for (DataMart hierarchy2 : dataMarts) {
+			Hierarchy h1 = new Hierarchy();
+			h1.setId(hierarchy2.getId().toString());
+			h1.setLabel(hierarchy2.getName());
+			hiearchy.add(h1);
+		}
+		// Hierarchy h1 = new Hierarchy();
+		// h1.setId("52d4f60b44aed848df5804e2");
+		// h1.setLabel("Test loader DM");
+		// hierarchy.add(h1);
 	String jsonRepresentation = "";
 	
-	if(hierarchy!=null){
+		if (hiearchy != null) {
 		Gson gson = new GsonBuilder().excludeFieldsWithModifiers(Modifier.PROTECTED).create();
-		jsonRepresentation= gson.toJson(hierarchy);
+			jsonRepresentation = gson.toJson(hiearchy);
 		}
 	
 	return ok(jsonRepresentation);

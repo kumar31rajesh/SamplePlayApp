@@ -2,27 +2,26 @@ package filters;
 
 import java.util.List;
 
+import com.cerrid.model.collections.DataMart;
+
 import controllers.MorphiaObject;
-import models.Hierarchy;
-import models.LoanData;
 
 
 public class LoanDetails {
 	
-	public static List<LoanData> getLoanDetails(Long id){
-		List<LoanData> loandata=null;
+	public static List<DataMart> getLoanDetails(Long id) {
+		List<DataMart> loandata = null;
 		if (MorphiaObject.datastore != null) {
-			loandata = MorphiaObject.datastore.find(LoanData.class)
-					.filter("id", id).asList();
+			loandata = MorphiaObject.datastore.find(DataMart.class).asList();
 		}
 		return loandata ;
 	}
 	
-	public static List<Hierarchy> getHirarchy(){
-		List<Hierarchy> hi=null;
+	public static List<DataMart> getHirarchy() {
+		List<DataMart> hi = null;
 		
 		if (MorphiaObject.datastore != null) {
-			hi = MorphiaObject.datastore.find(Hierarchy.class).asList();
+			hi = MorphiaObject.datastore.find(DataMart.class).asList();
 		}
 		return hi ;
 		
