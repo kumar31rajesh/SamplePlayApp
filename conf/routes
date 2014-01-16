@@ -18,5 +18,5 @@ GET     /assets/*file               controllers.Assets.at(path="/public", file)
 
 # application routes
 POST /api/authenticate     controllers.AppController.authentiate()
-GET  /api/details/:id     controllers.AppController.details(id :Long)
+GET  /api/details/:id     controllers.AppController.details(id :String)
 GET  /api/hierarchy     controllers.AppController.getHirarchy()

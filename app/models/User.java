@@ -9,6 +9,10 @@ import com.google.code.morphia.annotations.Id;
 public class User {
 	@Id
 	private ObjectId _id;
+	private String username;
+	private String password;
+	private String domain;
+
 	public ObjectId get_id() {
 		return _id;
 	}
@@ -33,8 +37,6 @@ public class User {
 	public void setDomain(String domain) {
 		this.domain = domain;
 	}
-	private String username ;
-	private String password ;
-	private String domain ;
 	
+
 }

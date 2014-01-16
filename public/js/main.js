@@ -25,7 +25,6 @@ var AppRouter = Backbone.Router.extend({
               url: "/api/details/"+id, 
               dataType:"json",
               success: function (response) {
-            	  
             	  $('#page-content-wrapper').html( '<div id="filters_wrappers"></div> <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered" id="example"></table>' );
                   var otable=$('#example').dataTable({
                 	 "aaData":response.aaData,
@@ -89,7 +88,7 @@ var AppRouter = Backbone.Router.extend({
   
 });
 
-utils.loadTemplate(['HeaderView','LoginView','FooterView','HomeView','ProductView','AdminAuthenticationView','SignUpView'], function() {
+utils.loadTemplate(['HeaderView','LoginView','FooterView','HomeView','ProductView'], function() {
     app = new AppRouter();
     Backbone.history.start();
 });
