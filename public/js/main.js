@@ -1,12 +1,13 @@
+
 var AppRouter = Backbone.Router.extend({
 
     routes: {
-    	"":"login",
     	"login":"login",
     	"signup":"validateAdmin",
     	"home":"homepage",
     	"home/details/:id":"detailsView",
     	"products":"displayProducts",
+    	"meshup":"displayMeshUp",
     	"products/source/:id":"displayProductSource"
     },
 
@@ -18,6 +19,8 @@ var AppRouter = Backbone.Router.extend({
         $('.page-footer').html(this.footerView.el);        
     },
     detailsView: function (id) {	
+    	this.homepage();
+    
     	  $.ajax({
               type: "GET", 
               url: "/api/details/"+id, 
@@ -42,6 +45,12 @@ var AppRouter = Backbone.Router.extend({
             	  
               }
           });
+    	  
+    	  $('body').on('mouseover', '.table thead tr th', function () {
+    		
+    		    $(this).popover('show');
+    		});
+    	  
     	
     /*	$('#page-content-wrapper').html( '<div id="filters_wrappers"></div> <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered" id="example"></table>' );
         var otable=$('#example').dataTable( {
@@ -78,25 +87,31 @@ var AppRouter = Backbone.Router.extend({
     	$(".content").html(this.loginview.el);  
 	},
     homepage: function() {
-    	
+ 
            $(".content").html((new HomeView).el);
            this.headerView.selectMenuItem('home');
           
 	},
 	displayProducts:function(){
-		this.products=new Products([new Product({name:'Product1',id:'0',children:new Products([new Product({name:'Prod1-Child1',id:'01'}),new Product({name:'Prod1-Child2',id:'02'})]) }),new Product({name:'Product2',id:'1'})]);
+		this.products=new Products([new Product({name:'Product1',id:'0',children:new Products([new Product({name:'Prod1-Child1',id:'01'}),new Product({name:'Prod1-Child2',id:'02'})]) }),new Product({name:'Product2',id:'1',children:[]})]);
 		$(".content").html((new ProductView({collection:this.products})).el);
 		this.headerView.selectMenuItem('products');
 	},
 	displayProductSource:function(id){
 		$('prodName').val=id;
+	},
+	displayMeshUp:function(){
+		
+		$(".content").html((new MeshUpView).el);
+		this.headerView.selectMenuItem('meshup');
 	}
   
 });
 
-utils.loadTemplate(['HeaderView','LoginView','FooterView','HomeView','ProductView'], function() {
+utils.loadTemplate(['HeaderView','LoginView','FooterView','HomeView','ProductView','AdminAuthenticationView','SignUpView','MeshUpView'], function() {
     app = new AppRouter();
     Backbone.history.start();
 });
+
 
 

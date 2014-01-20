@@ -3,8 +3,8 @@ url:"/api/authenticate",
 initialize: function () {
     this.validators = {};
 
-    this.validators.username = function (value) {
-        return value.length > 0 ? {isValid: true} : {isValid: false, message: "Please Enter UserName"};
+    this.validators.email = function (value) {
+        return value.length > 0 ? {isValid: true} : {isValid: false, message: "Please Enter Email"};
     };
     this.validators.password = function (value) {
         return value.length > 0 ? {isValid: true} : {isValid: false, message: "Please Enter Password"};
@@ -15,10 +15,10 @@ initialize: function () {
 
 defaults: {
 	message:"Sign In to Analytics",
-    username: "",
+	email:"",
     password: "",
     domain:"",
-    email:""
+    isLoggedIn:false
 },
 validateItem: function (key) {
     return (this.validators[key]) ? this.validators[key](this.get(key)) : {isValid: true};
@@ -85,7 +85,12 @@ window.Tree = Backbone.Model.extend({
   },
 
   initialize: function() {
-    if (!this.get("children")) this.set("children", new Trees());
+	  
+    if (!this.get("children")){
+
+    	this.set("children", new Trees());
+    	
+    }
   },
 
   getChildrenIds: function() {
@@ -107,7 +112,7 @@ window.Tree = Backbone.Model.extend({
   },
 
   hasChildren: function() {
-    return this.get("children").size() > 0;
+    return this.get("children").length > 0;
   },
 
   // Internals methods

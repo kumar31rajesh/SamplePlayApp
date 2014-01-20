@@ -1,9 +1,9 @@
 package filters;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.google.code.morphia.query.Query;
-
 import models.User;
+
+import com.fasterxml.jackson.databind.JsonNode;
+
 import controllers.MorphiaObject;
 
 public class LoginAuthentication {
@@ -12,9 +12,9 @@ public class LoginAuthentication {
 		User user = null;
 		boolean isAuthentic = false;
 		if (MorphiaObject.datastore != null) {
-			System.out.println(asJson.get("username").asText());
+			System.out.println(asJson.get("email").asText());
 			user = MorphiaObject.datastore.find(User.class)
-					.filter("username", asJson.get("username").asText()).get();
+					.filter("email", asJson.get("email").asText()).get();
 		}
 		if (user == null) {
 			isAuthentic = false;
@@ -43,13 +43,14 @@ public class LoginAuthentication {
 		// TODO Auto-generated method stub
 		User user =null;
 		boolean issaved=false;
+		System.out.println("saveUser");
 		if (MorphiaObject.datastore != null) {
-			System.out.println(asJson.get("username").asText());
-			user = MorphiaObject.datastore.find(User.class).filter("username", asJson.get("username").asText()).get();
-			System.out.print(">>>>>>>>"+user.getUsername());
-			if ((user.getUsername().equalsIgnoreCase("")) && (user.getUsername()==null)) {
+			System.out.println(asJson.get("email").asText());
+			user = MorphiaObject.datastore.find(User.class).filter("email", asJson.get("email").asText()).get();
+			
+			if ((user==null)) {
 				user=new User();
-				user.setUsername(asJson.get("username").asText());
+				user.setEmail(asJson.get("email").asText());
 				user.setPassword(asJson.get("password").asText());
 				user.setDomain(asJson.get("domain").asText());
 				MorphiaObject.datastore.save(user);
