@@ -5,3 +5,5 @@ logs*
 project*
 /bin
 .settings/*
+.classpath
+.project
