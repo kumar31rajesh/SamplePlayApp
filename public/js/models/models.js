@@ -81,7 +81,8 @@ window.Tree = Backbone.Model.extend({
 
   defaults: {
     id: 0,
-    label: "item"
+    label: "item",
+    children:[]
   },
 
   initialize: function() {
@@ -89,6 +90,16 @@ window.Tree = Backbone.Model.extend({
     if (!this.get("children")){
 
     	this.set("children", new Trees());
+    	
+    }else{
+    	//this.set("children", new Trees(this.get("children")));
+    	
+    	if (this.get("children").isArray){
+    		
+    		this.set("children", new Trees(this.get("children")));
+        	
+        	console.log(JSON.stringify(this.get("children")));
+    	}
     	
     }
   },
@@ -142,19 +153,21 @@ window.Trees  = Backbone.Collection.extend({
   }
 });
 
-window.Product= Backbone.Model.extend({
+
+
+window.Project= Backbone.Model.extend({
 
 	defaults: {
 	    id: 0,
-	    name: "Product1",
+	    name: "Root",
 	    children:[]
 	  }
 
 	  });
 
-window.Products=Backbone.Collection.extend({
+window.Projects=Backbone.Collection.extend({
 	
-	model: Product	
+	model: Project	
 	
 });
 

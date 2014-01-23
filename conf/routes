@@ -20,6 +20,7 @@ GET     /assets/*file               controllers.Assets.at(path="/public", file)
 POST /api/authenticate     controllers.AppController.authentiate()
 POST /api/validateAdmin     controllers.AppController.validateAdmin()
 POST /api/saveUser     controllers.AppController.saveUserDetails()
+POST /api/uplaodDataSourceCSVFile     controllers.AppController.uplaodDataSourceCSVFile()
 
 GET  /api/details/:id     controllers.AppController.details(id :String)
 GET  /api/hierarchy     controllers.AppController.getHirarchy()

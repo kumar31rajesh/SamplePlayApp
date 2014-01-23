@@ -1,12 +1,18 @@
 package filters;
 
+
+import java.io.File;
+
+import play.mvc.Http.MultipartFormData;
+import play.mvc.Http.MultipartFormData.FilePart;
+import play.mvc.Http.RequestBody;
 import models.User;
 
 import com.fasterxml.jackson.databind.JsonNode;
 
 import controllers.MorphiaObject;
 
-public class LoginAuthentication {
+public class ApplicationServices {
 
 	public static boolean loginValidation(JsonNode asJson) {
 		User user = null;
@@ -60,6 +66,25 @@ public class LoginAuthentication {
 		
 		
 		return issaved;
+	}
+
+	public static boolean uploadCSVFile(MultipartFormData body) {
+		// TODO Auto-generated method stub
+		FilePart picture = body.getFile("picture");
+		
+		try{
+		System.out.println("file>>>>>"+picture);
+		  if (picture != null) {
+		    String fileName = picture.getFilename();
+		    String contentType = picture.getContentType(); 
+		    File file = picture.getFile();
+		    
+		  } 
+		  
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		  return true;
 	}
 
 }

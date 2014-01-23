@@ -1,14 +1,16 @@
 
 var AppRouter = Backbone.Router.extend({
-
+	
     routes: {
     	"login":"login",
     	"signup":"validateAdmin",
     	"home":"homepage",
     	"home/details/:id":"detailsView",
-    	"products":"displayProducts",
+    	"projects/datasourcelist/:label":"displayDataSourceView",
+    	"projects":"displayProjectsList",
     	"meshup":"displayMeshUp",
-    	"products/source/:id":"displayProductSource"
+    	"products/source/:id":"displayProductSource",
+    	"projects/createDataSource":"ProductDataSource"
     },
 
     initialize: function () {
@@ -19,7 +21,7 @@ var AppRouter = Backbone.Router.extend({
         $('.page-footer').html(this.footerView.el);        
     },
     detailsView: function (id) {	
-    	this.homepage();
+
     
     	  $.ajax({
               type: "GET", 
@@ -92,9 +94,8 @@ var AppRouter = Backbone.Router.extend({
            this.headerView.selectMenuItem('home');
           
 	},
-	displayProducts:function(){
-		this.products=new Products([new Product({name:'Product1',id:'0',children:new Products([new Product({name:'Prod1-Child1',id:'01'}),new Product({name:'Prod1-Child2',id:'02'})]) }),new Product({name:'Product2',id:'1',children:[]})]);
-		$(".content").html((new ProductView({collection:this.products})).el);
+	displayProjectsList:function(){
+		$(".content").html((new ProjectView).el);
 		this.headerView.selectMenuItem('products');
 	},
 	displayProductSource:function(id){
@@ -104,11 +105,19 @@ var AppRouter = Backbone.Router.extend({
 		
 		$(".content").html((new MeshUpView).el);
 		this.headerView.selectMenuItem('meshup');
+	},
+	ProductDataSource:function(label){
+		
+		$('#page-content').html((new DataSourceCreateView()).el);
+	},
+	displayDataSourceView:function(label){
+			
+		 $('#page-content').html((new DataSourceView()).el);
 	}
   
 });
 
-utils.loadTemplate(['HeaderView','LoginView','FooterView','HomeView','ProductView','AdminAuthenticationView','SignUpView','MeshUpView'], function() {
+utils.loadTemplate(['HeaderView','LoginView','FooterView','HomeView','ProjectView','AdminAuthenticationView','SignUpView','MeshUpView','DataSourceView','DataSourceCreateView'], function() {
     app = new AppRouter();
     Backbone.history.start();
 });
