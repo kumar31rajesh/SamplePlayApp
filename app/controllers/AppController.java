@@ -1,23 +1,32 @@
 package controllers;
 
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import models.Hierarchy;
 import play.mvc.Controller;
+import play.mvc.Http.MultipartFormData;
+import play.mvc.Http.MultipartFormData.FilePart;
 import play.mvc.Result;
 
 import com.cerrid.analytics.service.ReportingService;
 import com.cerrid.model.accessor.exception.DBQueryExecuteException;
 import com.cerrid.model.collections.DataMart;
 import com.fasterxml.jackson.databind.JsonNode;
+import com.google.common.io.Files;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import filters.LoanDetails;
-import filters.LoginAuthentication;
+import filters.ApplicationServices;
 
 public class AppController extends Controller {
 	
@@ -26,7 +35,7 @@ public class AppController extends Controller {
 		System.out.println("authentiate");
 		JsonNode asJson = request().body().asJson();
 		
-		boolean isAuthenticate=LoginAuthentication.loginValidation(asJson);
+		boolean isAuthenticate=ApplicationServices.loginValidation(asJson);
 		
 		if(isAuthenticate)
 			return ok("{\"status\":\"home\",\"message\":\"Welcome\"}");
@@ -76,7 +85,7 @@ public static Result validateAdmin() {
 	System.out.println("validateAdmin");
 	JsonNode asJson = request().body().asJson();
 	
-	boolean isAuthenticate=LoginAuthentication.adminValidation(asJson);
+	boolean isAuthenticate=ApplicationServices.adminValidation(asJson);
 	
 	if(isAuthenticate)
 		return ok("{\"isValid\":\"True\"}");
@@ -93,7 +102,7 @@ public static Result saveUserDetails() {
 	System.out.println("saveUserDetails");
 	JsonNode asJson = request().body().asJson();
 	
-	boolean saved=LoginAuthentication.saveUser(asJson);
+	boolean saved=ApplicationServices.saveUser(asJson);
 	
 	if(saved)
 		return ok("{\"isSaved\":\"true\"}");
@@ -102,6 +111,24 @@ public static Result saveUserDetails() {
 	
 	
 }
+
+public static Result uplaodDataSourceCSVFile() {
+	MultipartFormData body = request().body().asMultipartFormData();
+	FilePart picture = body.getFile("filepath");
+	File outFile = null;
+	  if (picture != null) {
+	    File inFile = picture.getFile();
+	    outFile = new File("/home/cerrid/cerrid/UploadedFiles/" + picture.getFilename());
+	    try {
+			Files.copy(inFile, outFile);
+		} catch (IOException e1) {
+			e1.printStackTrace();
+			return ok("{\"isSaved\":\"false\", \"error\":\"internal error\"}");
+		}
 	
+	  }	
+	return ok("{\"isSaved\":\"true\"}");
+}
+
 
 }

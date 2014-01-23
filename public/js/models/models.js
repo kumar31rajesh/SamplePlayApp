@@ -3,8 +3,8 @@ url:"/api/authenticate",
 initialize: function () {
     this.validators = {};
 
-    this.validators.username = function (value) {
-        return value.length > 0 ? {isValid: true} : {isValid: false, message: "Please Enter UserName"};
+    this.validators.email = function (value) {
+        return value.length > 0 ? {isValid: true} : {isValid: false, message: "Please Enter Email"};
     };
     this.validators.password = function (value) {
         return value.length > 0 ? {isValid: true} : {isValid: false, message: "Please Enter Password"};
@@ -15,10 +15,10 @@ initialize: function () {
 
 defaults: {
 	message:"Sign In to Analytics",
-    username: "",
+	email:"",
     password: "",
     domain:"",
-    email:""
+    isLoggedIn:false
 },
 validateItem: function (key) {
     return (this.validators[key]) ? this.validators[key](this.get(key)) : {isValid: true};
@@ -81,11 +81,27 @@ window.Tree = Backbone.Model.extend({
 
   defaults: {
     id: 0,
-    label: "item"
+    label: "item",
+    children:[]
   },
 
   initialize: function() {
-    if (!this.get("children")) this.set("children", new Trees());
+	  
+    if (!this.get("children")){
+
+    	this.set("children", new Trees());
+    	
+    }else{
+    	//this.set("children", new Trees(this.get("children")));
+    	
+    	if (this.get("children").isArray){
+    		
+    		this.set("children", new Trees(this.get("children")));
+        	
+        	console.log(JSON.stringify(this.get("children")));
+    	}
+    	
+    }
   },
 
   getChildrenIds: function() {
@@ -107,7 +123,7 @@ window.Tree = Backbone.Model.extend({
   },
 
   hasChildren: function() {
-    return this.get("children").size() > 0;
+    return this.get("children").length > 0;
   },
 
   // Internals methods
@@ -137,19 +153,21 @@ window.Trees  = Backbone.Collection.extend({
   }
 });
 
-window.Product= Backbone.Model.extend({
+
+
+window.Project= Backbone.Model.extend({
 
 	defaults: {
 	    id: 0,
-	    name: "Product1",
+	    name: "Root",
 	    children:[]
 	  }
 
 	  });
 
-window.Products=Backbone.Collection.extend({
+window.Projects=Backbone.Collection.extend({
 	
-	model: Product	
+	model: Project	
 	
 });
 

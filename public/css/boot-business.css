@@ -18,7 +18,6 @@
 .navbar-inner, footer {
   border: none;
   padding: 15px 0;
-  background: url('../img/header-footer.png');
 }
 .navbar .brand-bootbus {
 	font-size: 30px;
@@ -82,7 +81,7 @@
 }
 
 .img-logo{
-	width: 110px;
+	width: 70px;
 }
 
 .fill{
@@ -295,7 +294,7 @@ clear:both;
   height: 100px;
 }
 footer {
-  color: white;
+  color: black;
 }
 .quick-links {
   list-style: none;

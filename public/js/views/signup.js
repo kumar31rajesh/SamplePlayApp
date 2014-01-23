@@ -55,7 +55,7 @@ window.SignUpView=Backbone.View.extend({
         "click #save"   : "saveUserDetails"
     },
     saveUserDetails: function () {
-    	this.model.set("username",this.$el.find("#username").val());
+ 
     	this.model.set("email",this.$el.find("#email").val());
         this.model.set("password",this.$el.find("#password").val());
         this.model.set("domain",this.$el.find("#domain").val());

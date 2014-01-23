@@ -1,8 +1,8 @@
  <style>
 #page-content{
  	
-    left: 177px;
-    min-width: 1095px;
+    left: 250px;
+    min-width: 1025px;
     position: absolute;
 }
 
@@ -10,7 +10,7 @@
 
   margin-left: -245px;
   left: 250px;
-  width: 170px;
+  width: 245px;
   position: absolute;
   overflow: none;
   transition: all 0.4s ease 0s;
@@ -18,14 +18,6 @@
   min-height:530px;
 
 }
-
-#links-content{
-  border:1px solid #DDD ;
-  height:50px;
-  margin-bottom:5px;
-}
-
-
 
 </style>
      
@@ -38,6 +30,20 @@
               <li><a href="#products/source/1">Product 2</a></li>
               <li><a href="#products/source/2">Product 3</a></li>
             </ul> -->
+            
+    <form>
+    <fieldset>
+    <legend><span style="margin: 20px;">Select Data Source</span></legend>
+    <div class="form-horizontal" id="datasource-form">
+     <div class="control-group" >
+     <select class="form-control" id="filetype">
+  		<option value="csv" >CSV</option>
+  		<option value="file">File</option>
+	</select>
+     </div>
+     </div>
+     </fieldset>
+    </form>
     </div>
     <div id="page-content">
 
@@ -55,28 +61,22 @@
   </div> -->
   <div class="panel-body">
         <form>
-    <fieldset>
-    <legend>Data Source</legend>
     <div class="form-horizontal" id="datasource-form">
-     <div class="control-group">
+    
+    <!--  <div class="control-group">
      <label class="control-label" for="dataSourceName" id="prodName">Name</label>
      <input type="text" placeholder="Enter the Name.........">
      </div>
      <div class="control-group">
      <label class="control-label" for="dataSourceType">Type</label>
      <select class="form-control">
-  <option>CSV</option>
+  		<option>CSV</option>
 	</select>
+     </div> -->
+     
+     
      </div>
-     <div class="control-group">
-      <label class="control-label" for="dataSourcePath">Path</label>
-     <input type="file" >
-     </div>
-     </div>
-    </fieldset>
-    </form>
-  
-    
+    </form> 
   </div>
 </div> 
     </div>

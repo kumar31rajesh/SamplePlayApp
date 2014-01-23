@@ -1177,7 +1177,11 @@
 				{
 					nTh = oSettings.aoColumns[i].nTh;
 					nTh.setAttribute('role', 'columnheader');
-					nTh.setAttribute('title', oSettings.aoColumns[i].sInfo);
+					nTh.setAttribute('data-original-title', 'Twitter Bootstrap Popover');
+					nTh.setAttribute('data-content', 'Its so simple to create a tooltop for my website!');
+					nTh.setAttribute('rel', 'popover');
+					
+					//data-original-title="Twitter Bootstrap Popover" data-content="It's so simple to create a tooltop for my website!" rel="popover"
 					
 					
 					if ( oSettings.aoColumns[i].bSortable )
@@ -1209,8 +1213,10 @@
 					nTh = oSettings.aoColumns[i].nTh;
 					nTh.innerHTML = oSettings.aoColumns[i].sTitle;
 					nTh.setAttribute('tabindex', '0');
-					nTh.setAttribute('title', oSettings.aoColumns[i].sInfo);
-					console.log(nTh);
+					nTh.setAttribute('data-placement', 'top');
+					nTh.setAttribute('data-original-title', oSettings.aoColumns[i].sTitle);
+					nTh.setAttribute('data-content', '<dl class="dl-horizontal"><dt>'+'Column Desc1' +'</dt><dd>ASDKAJ AKSJdh AKSJDHkj kasjd</dd><dt>Column Id Desc</dt><dd>thsda hsdh kjas</dd></dl>');
+					nTh.setAttribute('rel', 'popover');
 					
 					if ( oSettings.aoColumns[i].sClass !== null )
 					{

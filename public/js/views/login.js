@@ -35,7 +35,7 @@ window.LoginView = Backbone.View.extend({
    
     login: function () { 
 
-    this.model.set("username",this.$el.find("#username").val());
+    this.model.set("email",this.$el.find("#email").val());
     this.model.set("password",this.$el.find("#password").val());
     this.model.set("domain",this.$el.find("#domain").val());
     
@@ -49,11 +49,12 @@ window.LoginView = Backbone.View.extend({
                 if(response.status== 'home'){
 
                 	var headermodel=new HeaderModel();
-                	headermodel.set("username",model.get("username"));
+                	headermodel.set("username",model.get("email"));
                 	headermodel.set("isLogedIn",true);
                 	var headerview=new HeaderView({model:headermodel}) ;
                 	
                 	$('#header').html(headerview.el);
+                
                 	app.navigate('#home', true);	  	
                 
                 }
