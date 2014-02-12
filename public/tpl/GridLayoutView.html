@@ -1,0 +1,137 @@
+ <style>
+
+.bar {
+  fill: steelblue;
+}
+
+.bar:hover {
+  fill: brown;
+}
+
+.axis {
+  font: 10px sans-serif;
+}
+
+</style>
+ 
+ <div class="mainy" style="margin-left:0px;">
+ 	<div class="row">
+                                 
+                      <div class="col-md-12" >
+					
+                        <div class="panel panel-default">
+  									<!-- <div class="panel-heading">
+ 								
+  
+  									</div> -->
+  
+   									<div class="panel-body">
+  
+                            			<div class="row">
+                            				<div class="col-md-6">
+                            					<div class="panel panel-default" style="height: 400px;">
+                            						 <div class="panel-heading">
+                            						 <div class="pull-left">
+                            						 	<button class="btn btn-default"  desc="chartSettings" >Create</button>
+                            						 </div>
+                            						 <div class="pull-right">
+                            						 <a href="#" class="btn btn-default "><i class="icon-fullscreen"></i></a>
+                            						 </div>
+                            						 <div class="clearfix"></div>
+                            						 </div> 
+                            						 <div class="panel-body">
+                            						 	<div class="row">
+                            						 		<div class="col-md-12">
+                            						 			<div id="chart_container">
+                            						 			  <div id="barchart"></div>
+                            						 			</div>
+                            						 			
+                            						 		</div>
+                            						 	</div>
+                            						 </div>
+                            					</div>
+                            				</div>
+                            				<div class="col-md-6">
+                            					<div class="panel panel-default" style="height: 400px;">
+                            						 <div class="panel-heading">
+                            						 <div class="pull-left">
+                            						 <a href="#" class="btn btn-default ">Create</a>
+                            						 </div>
+                            						 
+                            						 <div class="pull-right">
+                            						 <a href="#" class="btn btn-default "><i class="icon-fullscreen"></i></a>
+                            						 </div>
+                            						 <div class="clearfix"></div>
+                            						 </div> 
+                            						 <div class="panel-body">
+                            						 	<div class="row">
+                            						 		<div class="col-md-12">
+                            						 			<div id="chart_container">
+                            						 			  <div id="stackChart"></div>
+                            						 			</div>
+                            						 			
+                            						 		</div>
+                            						 	</div>
+                            						 </div>
+                            					</div>
+                            				
+                            				</div>
+                            			</div>
+                            			<div class="row">
+                            				<div class="col-md-6">
+                            					<div class="panel panel-default" style="height: 400px;">
+                            						<div class="panel-heading">
+                            						<div class="pull-left">
+                            						 <a href="#" class="btn btn-default ">Create</a>
+                            						 </div>
+                            						 <div class="pull-right">
+                            						<a href="#" class="btn btn-default  "><i class="icon-fullscreen"></i></a>
+                            						 </div>
+                            						 <div class="clearfix"></div>
+                            						 </div> 
+                            						 <div class="panel-body"></div>
+                            					</div>
+                            				</div>
+                            				<div class="col-md-6">
+                            					<div class="panel panel-default" style="height: 400px;">
+                            						 <div class="panel-heading">
+                            						 <div class="pull-left">
+                            						 <a href="#" class="btn btn-default">Create</a>
+                            						 </div>
+                            						 <div class="pull-right">
+                            						 <a href="#" class="btn btn-default "><i class="icon-fullscreen"></i></a>
+                            						 </div>
+                            						 <div class="clearfix"></div>
+                            						 </div> 
+                            						 <div class="panel-body"></div>
+                            					</div>
+                            				
+                            				</div>
+                            			</div>
+
+      								</div>
+  
+						</div>
+                                     
+                      </div>
+                                   
+	</div>  
+</div>
+
+<script>
+
+new RepoCharts.Graph.Ajax( {
+
+	element:document.getElementById("barchart"),
+	renderer: 'bar',
+	dataURL: '/api/loadChartData',
+} );
+
+new RepoCharts.Graph.Ajax( {
+	element: document.getElementById("stackChart"),
+	renderer: 'stack',
+	dataURL: '/api/loadChartData',
+} );
+
+</script>
+

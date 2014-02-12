@@ -1179,7 +1179,8 @@
 					nTh.setAttribute('role', 'columnheader');
 					nTh.setAttribute('data-original-title', 'Twitter Bootstrap Popover');
 					nTh.setAttribute('data-content', 'Its so simple to create a tooltop for my website!');
-					nTh.setAttribute('rel', 'popover');
+					nTh.setAttribute('data-toggle', 'popover');
+					nTh.setAttribute('data-container', 'body');
 					
 					//data-original-title="Twitter Bootstrap Popover" data-content="It's so simple to create a tooltop for my website!" rel="popover"
 					
@@ -1215,8 +1216,11 @@
 					nTh.setAttribute('tabindex', '0');
 					nTh.setAttribute('data-placement', 'top');
 					nTh.setAttribute('data-original-title', oSettings.aoColumns[i].sTitle);
-					nTh.setAttribute('data-content', '<dl class="dl-horizontal"><dt>'+'Column Desc1' +'</dt><dd>ASDKAJ AKSJdh AKSJDHkj kasjd</dd><dt>Column Id Desc</dt><dd>thsda hsdh kjas</dd></dl>');
-					nTh.setAttribute('rel', 'popover');
+					nTh.setAttribute('data-content', '<dl class="dl-horizontal"><dt style="text-align:left;width:80px">ColumnID</dt><dd  style="margin-left:85px">"'+oSettings.aoColumns[i].sTitle+'"</dd><dt  style="text-align:left;width:80px">ColumnDesc</dt><dd style="margin-left:85px">This is Title of the given Column</dd></dl>');
+					nTh.setAttribute('data-toggle', 'popover');
+					nTh.setAttribute('data-container', 'body');
+					nTh.setAttribute('data-html', 'true');
+					
 					
 					if ( oSettings.aoColumns[i].sClass !== null )
 					{

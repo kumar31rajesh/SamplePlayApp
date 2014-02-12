@@ -1,82 +1,63 @@
-
-<!-- Start: Navigation wrapper -->
-   <div class="container">
-   <div class="logo">
- 
-	<img class="img-logo" alt="CerridSolutions"  src="<%=logo%>">
-	
-   </div>
-   <div class="navbar-inner">
-          <div class="container">
-           
-			<%if(isLogedIn){%>
-            <!-- Below button used for responsive navigation -->
-            <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
-            <!-- Start: Primary navigation -->
-            <div class="nav-collapse collapse">        
-              <ul class="nav pull-right">
-                <li id="products">
-                <a href="#projects">Projects</a> 
-                
-                </li>
-                <li id="meshup">
-                <a href="#meshup">MeshUp</a> 
-                </li>
-            <!--     <li class="dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">About<b class="caret"></b></a>
-                  <ul class="dropdown-menu">
-                    <li><a href="our_works.html">Our works</a></li>
-                    <li><a href="patnerships.html">Parnerships</a></li>
-                    <li><a href="leadership.html">Leadership</a></li>
-                    <li><a href="news.html">News</a></li>
-                    <li><a href="events.html">Events</a></li>
-                    <li><a href="blog.html">Blog</a></li>
-                  </ul>
-                </li>
-                <li><a href="faq.html">FAQ</a></li>
-                <li><a href="contact_us.html">Contact us</a></li> -->
-                <li id="home"><a href="#home" >Home</a></li>
-                <li><a href="#login" >Sign Out</a></li>
-              </ul>
-            </div>
-            
-            <%}else{%>
-            
-             <!-- Below button used for responsive navigation -->
-            <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
-            <!-- Start: Primary navigation -->
-            <div class="nav-collapse collapse">        
-              <ul class="nav pull-right">
+ <div class="container">
+            <div class="row">
+               <div class="col-md-4">
+                  <div class="logo">
+                     <img src="assets/img/cerrid_logo_retina12.png" alt="CerridSolutions" style="width:105px;">
+                  </div>
+               </div>
                
-                <li class="dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">About Us<b class="caret"></b></a>
-                  <ul class="dropdown-menu">
-                    <li><a href="our_works.html">Our works</a></li>
-                    <li><a href="patnerships.html">Parnerships</a></li>
-                    <li><a href="leadership.html">Leadership</a></li>
-                    <li><a href="news.html">News</a></li>
-                    <li><a href="events.html">Events</a></li>
-                    <li><a href="blog.html">Blog</a></li>
-                  </ul>
-                </li>
-                <li><a href="faq.html">FAQ</a></li>
-                <li><a href="contact_us.html">Contact us</a></li>
-                <li><a href="#login" >Sign in</a></li>
-              </ul>
+              
+               <div class="col-md-8">
+               <%if(isLoggedIn){%>
+                  <div class="navbar navbar-inverse" role="banner">
+                      <div class="navbar-header">
+                        <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
+                          <span>Menu</span>
+                        </button>
+                      </div>
+                      <nav class="collapse navbar-collapse bs-navbar-collapse navbar-right" role="navigation">
+                        <ul class="nav navbar-nav">
+                        	 <li class="dropdown">
+                            	<a href="#" class="dropdown-toggle" data-toggle="dropdown">Report Builder <b class="caret"></b></a>
+                            	<ul class="dropdown-menu animated fadeInUp">
+                              	<li class="dropdown-submenu">
+    								<a tabindex="-1" href="#">New Report</a>
+    								<ul class="dropdown-menu">
+      									<li><a tabindex="-1" href="javascript:void(0)" data-id="1">1*1</a></li>
+      								<!-- 	<li class="dropdown-submenu"><a href="#">More..</a>
+        									<ul class="dropdown-menu">
+        									<li><a href="#">3rd level</a></li>
+        									<li><a href="#">3rd level</a></li>
+        									</ul>
+      									</li> -->
+      									<li><a href="javascript:void(0)" data-id="2">2*1</a></li>
+      									<li><a href="javascript:void(0)" data-id="3">3*1</a></li>
+   								 </ul>
+  								</li>
+                                <li><a href="#">Load Existing Report</a></li>
+                            </ul>
+                          </li>
+                        	<li >
+                            <a href="#projects" >Projects</a>
+                         	</li>
+                         	<li >
+                            <a href="#datasets" >DataSet's</a>
+                         	</li>
+                         	<li >
+                            <a href="#home" >Data Analysis</a>
+                         	</li>
+                      
+                          <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">My Account <b class="caret"></b></a>
+                            <ul class="dropdown-menu animated fadeInUp">
+                              <li><a href="#">Profile</a></li>
+                              <li><a href="#logout">Logout</a></li>
+                            </ul>
+                          </li>
+                        </ul>
+                      </nav>
+                  </div>
+                    <%}%>
+               </div>
             </div>
-            
-            <%}%>
-            
-          </div>
-        </div>
-        
-        </div>
-      <!-- End: Navigation wrapper -->   
+         </div>

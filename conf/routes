@@ -12,16 +12,17 @@ GET  /lib/*file             controllers.Assets.at(path="public/lib/", file)
 GET  /css/*file             controllers.Assets.at(path="public/css/", file)
 GET  /js/*file             controllers.Assets.at(path="public/js/", file)
 
+
+
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
-
 
 # application routes
 POST /api/authenticate     controllers.AppController.authentiate()
 POST /api/validateAdmin     controllers.AppController.validateAdmin()
 POST /api/saveUser     controllers.AppController.saveUserDetails()
-POST /api/uplaodDataSourceCSVFile     controllers.AppController.uplaodDataSourceCSVFile()
-
-POST  /api/details     controllers.AppController.details()
+POST  /api/details     	   controllers.AppController.details()
 GET  /api/dataSource/:label controllers.AppController.dataSource(label :String)
-GET  /api/hierarchy     controllers.AppController.getHirarchy()
+POST /api/uplaodDataSourceCSVFile     controllers.AppController.uplaodDataSourceCSVFile()
+POST /api/loadFileContents     controllers.AppController.loadFileContents()
+GET /api/loadChartData			controllers.AppController.loadChartData()

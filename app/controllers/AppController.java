@@ -16,7 +16,6 @@ import com.cerrid.analytics.service.ReportingService;
 import com.cerrid.model.accessor.exception.DBQueryExecuteException;
 import com.cerrid.model.collections.DataMart;
 import com.fasterxml.jackson.databind.JsonNode;
-
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -42,17 +41,20 @@ public class AppController extends Controller {
 	public static Result details() {
 		String dataTableData = null;
 		Map<String,String[]>  data=request().body().asFormUrlEncoded();
-
-		
-		String tablecolumns=data.get("datacolumns")[0];
-		
-		System.out.println(tablecolumns);
 		
 		try {
-			dataTableData = ReportingService.getDataTableData(data.get("dataid")[0]);
-		} catch (DBQueryExecuteException e) {
+			
+			String tablecolumns=data.get("datacolumns")[0];
+			
+			System.out.println("columns"+tablecolumns);
+			//52d786eb44ae1f357323d228
+			
+		//	dataTableData = ReportingService.getDataTableData(data.get("dataid")[0]);
+			dataTableData = ApplicationServices.getLoanDetails(tablecolumns,data.get("dataid")[0]);
+			
+		}catch ( Exception e) {
 			e.printStackTrace();
-		}
+		} 
 		return ok(dataTableData);
 	}
 
@@ -82,10 +84,7 @@ public static Result getHirarchy(){
 		h1.setLabel(hierarchy2.getName());
 		hiearchy.add(h1);
 	}
-	// Hierarchy h1 = new Hierarchy();
-	// h1.setId("52d4f60b44aed848df5804e2");
-	// h1.setLabel("Test loader DM");
-	// hierarchy.add(h1);
+
 String jsonRepresentation = "";
 
 	if (hiearchy != null) {
@@ -142,6 +141,34 @@ public static Result uplaodDataSourceCSVFile() {
 		else
 			return ok("{\"isSaved\":\"false\",\"error\":\"internal server error\"}");
 
+}
+
+public static Result loadFileContents(){
+	
+	Map<String,String[]>  data=request().body().asFormUrlEncoded();
+	
+	Map<Integer, String> result=ApplicationServices.loadFileContents(data);
+	
+	  
+	  if(result==null)
+			return ok("{\"is\":\"false\"}");
+		else
+			return ok(result.get(0).toString());
+	
+}
+
+public static Result loadChartData(){
+	
+	//Map<String,String[]>  data=request().body().asFormUrlEncoded();
+	
+	String result=ApplicationServices.loadBarChart();
+	
+	  
+	  if(result==null)
+			return ok("{\"is\":\"false\"}");
+		else
+			return ok(result);
+	
 }
 
 

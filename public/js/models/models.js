@@ -177,7 +177,8 @@ window.DataSet=Backbone.Model.extend({
 		label:"",
 		name:"",
 		path:"",
-		type:""
+		type:"",
+		id:""
 	}
 	
 });

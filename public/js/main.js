@@ -1,206 +1,73 @@
 
 var AppRouter = Backbone.Router.extend({
-	
     routes: {
-    	"login":"login",
     	"signup":"validateAdmin",
-    	"home":"homepage",
-    	"home/details/:id":"detailsView",
-    	"projects/datasourcelist/:label":"displayDataSourceList",
-    	"projects":"displayProjectsList",
-    	"meshup":"displayMeshUp",
-    	"products/source/:id":"displayProductSource",
-    	"projects/createDataSource/:id":"createDataSource"
-    },
+    	"":"login",
+    	"login":"login",
+    	"logout":"logout",
+    	"home":"datasetViewer",
+    	"projects":"proejctsView",
+    	"datasets":"dataSetsView",
+    	"reportbuilder/newreport/:id":"buildReport",
+    	"newlayout":"buildnewLayout"
 
-    initialize: function () {
-    	this.headermodel=new HeaderModel() ;
-    	this.headerView = new HeaderView({model:this.headermodel}); 
-        this.footerView=new FooterView();
-        $('#header').html(this.headerView.el);
-        $('.page-footer').html(this.footerView.el);        
-    },
-    detailsView: function (id) {	
-    self=this;
-
-    	$("#myModal").modal('show');
-    	
-    	$('#myModal .bar').css('width','30%');
-    	  $.ajax({
-              type: "POST", 
-              url: "/api/details", 
-              dataType:"json",
-              data:{dataid:id,datacolumns:null},
-              success: function (response) {
-            	  
-            	  $("#myModal").modal('hide');
-            	  
-            	  var columnsfilters="<select multiple=\"multiple\" id=\"columnfilters\"><option value=\"all\" selected>All</option>";
-            	   
-            	  for(var i=0;i<response.aoColumns.length;i++){
-            		  columnsfilters=columnsfilters+"<option vaule='"+response.aoColumns[i].mData+"'>"+response.aoColumns[i].sTitle+"</option>" ;
-            	  }
-            	  columnsfilters=columnsfilters+"</select>";
-            	  
-            	  
-            	  $('#page-content-wrapper').html( '<div class="row" ><div id="filters_wrappers" class="pull-left"></div><div class="pull-right"><div class="btn btn-default btn-sm">GO</div></div></div> <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered" id="example"></table>' );
-            	  $('#filters_wrappers').append(columnsfilters);
-            	  
-            	  $('#example').dataTable({
-            	       	 "sScrollY": "380px",
-            	       	 "sScrollX": "965px",
-            	     	 "bPaginate": false,
-            	     	 "aoColumns":response.aoColumns,
-            	     	 "aaData":response.aaData
-            	         });
-            	 
-              },
-              error: function(){
-            	  $("#myModal").modal('hide');
-              }
-          });
-    	  
-    	  $('body').on('click', '.btn', function () {
-    		  
-    		  
-    		  
-      		   
-      		var columnName ; 
-      		$('#columnfilters :selected').each(function(i, selected){ 
-      			columnName=columnName+","+$(selected).val();		     
-      		 });
-  	     	
-      		$("#myModal").modal('show');
-         	
-         	$('#myModal .bar').css('width','30%');
-         	
-  	     	 $.ajax({
-  	              type: "POST", 
-  	              url: "/api/details", 
-  	              dataType:"json",
-  	              data:{dataid:id,datacolumns:columnName},
-  	              success: function (response) {
-  	            	  $("#myModal").modal('hide');
-  	            	  
-  	            	  $('#example').dataTable({
-  	            	       	 "sScrollY": "380px",
-  	            	       	 "sScrollX": "965px",
-  	            	     	 "bPaginate": false,
-  	            	     	 "aoColumns":response.aoColumns,
-  	            	     	 "aaData":response.aaData
-  	            	     	 
-  	            	         });
-  	            	 
-  	              },
-  	              error: function(){
-  	            	  $("#myModal").modal('hide');
-  	              }
-  	          });
-      	
-      		   
-     				});
-    	  
-    	  $('body').on('mouseover', '.table thead tr th', function () {
-    		
-    		    $(this).popover('show');
-    		});
-    	  
-    	
-    /*	$('#page-content-wrapper').html( '<div id="filters_wrappers"></div> <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered" id="example"></table>' );
-        var otable=$('#example').dataTable( {
-        	"sScrollY": "280px",
-    		"bPaginate": false,
-    		"bProcessing": true,
-    		"bServerSide": true,
-    		  "aoColumns": [
-                         { "mDataProp": "id" ,"sTitle":"ID"},
-                          { "mDataProp": "name" ,"sTitle":"NAME"},
-                          { "mDataProp": "amount" ,"sTitle":"AMOUNT"},
-                          { "mDataProp": "age" ,"sTitle":"AGE"},
-                          { "mDataProp": "place","sTitle":"PLACE" },
-                          { "mDataProp": "salary","sTitle":"SALARY" }
-                      ],
-             "sAjaxSource": "/api/details/"+id,
-             "sDom": "frtiS",
-             "oScroller": {
-                 "displayBuffer": 10
-               }
-        } ); */
- 
-    	
-    },
-    datatablefilters:function(columns,id){
-    	
-    		
-  
-     
- 	  
-    },
-    validateAdmin:function(){
-    	this.authmodel=new Authentication();
-    	this.adminAuthenticate=new AdminAuthenticationView({model:this.authmodel});
-    	$(".content").html(this.adminAuthenticate.el); 
     }
-    ,
-    login: function() {
-    	this.authmodel=new Authentication();
-    	this.loginview=new LoginView({model:this.authmodel});
-    	$(".content").html(this.loginview.el);  
-	},
-    homepage: function() {
- 
-           $(".content").html((new HomeView).el);
-           this.headerView.selectMenuItem('home');
-          
-	},
-	displayProjectsList:function(){
-		$(".content").html((new ProjectView).el);
-		this.headerView.selectMenuItem('products');
-	},
-	displayProductSource:function(id){
-		$('prodName').val=id;
-	},
-	displayMeshUp:function(){
-		
-		$(".content").html((new MeshUpView).el);
-		this.headerView.selectMenuItem('meshup');
-	},
-	createDataSource:function(label){
-		this.dataset=new DataSet();
-		this.dataset.set("label",label);
-		$('#page-content').html((new DataSourceCreateView({model:this.dataset})).el);
-	},
-	displayDataSourceList:function(label){
-		
-		this.dataset=new DataSet();
-		this.dataset.set("label",label);
-		
-		 
-		 $('#page-content').html((new DataSourceView({model:this.dataset})).el);
-		 
-		 this.datasetCollection=new DataSetCollection();
-		 this.datasetCollection.searchTerm=label;
-	     this.datasetCollection.fetch({
-	            success: function (collection, response) {
-	                
-	                collection.each(function(model){
-	                	$('#datasourcelist tbody').append((new DataSourceListingView({model:model})).el);
-	                	
-	                })
-	            
-	            },
-	            error: function (collection, response) {
-	            		console.log('asd');
-	            }
-	        });
-	     
-	     //
+  ,initialize:function(){
+	  this.authmodel=new Authentication();
+	  
+	  if(sessionStorage.getItem("isLoggedIn")){
+		  this.authmodel.set("isLoggedIn",true);
+	  }else{
+		  window.location.href='#login' ;
+	  }
+		  
+	  this.headerview=new HeaderView({model:this.authmodel});
+	  $(".header").html(this.headerview.el);   
+	  
+  },
+  validateAdmin:function(){
+  	this.adminAuthenticate=new AdminAuthenticationView({model:this.authmodel});
+  	$("#content").html(this.adminAuthenticate.el); 
+  },
+  login:function(){
+	  
+	  if(sessionStorage.getItem("isLoggedIn")){
+		  window.location.href='#home' ;
+	  }
+	  
+	  this.loginview=new LoginView({model:this.authmodel});
+	  $("#content").html(this.loginview.el); 
 	    
-	}
-  
+  },
+  logout:function(){
+	  
+	  	sessionStorage.removeItem("isLoggedIn");
+	  	this.authmodel.set("isLoggedIn",false);
+	  	this.loginview=new LoginView({model:this.authmodel});
+	  	$("#content").html(this.loginview.el);  
+		  
+	  },
+  datasetViewer:function(){
+	  $("#content").html((new DataViewer()).el);
+  },
+  proejctsView:function(){
+	  $("#content").html((new ProjectsView()).el);
+  },
+  dataSetsView:function(){
+	  $("#content").html((new DataSetsBuilderView()).el);
+  },
+  buildReport:function(id){
+
+	  $("#content").html((new ReportBuilderView()).el);
+  },
+  buildnewLayout:function(){
+	  $("#content").html((new GridLayoutView()).el);
+  }
+
+ 
 });
 
-utils.loadTemplate(['HeaderView','LoginView','FooterView','HomeView','ProjectView','AdminAuthenticationView','SignUpView','MeshUpView','DataSourceView','DataSourceCreateView'], function() {
+utils.loadTemplate(['LoginView','DataViewer','ProjectsView','HeaderView','AdminAuthenticationView','SignUpView','DataSourceListView','DataSourceCreateView','DataSetsBuilderView','GridLayoutView'], function() {
     app = new AppRouter();
     Backbone.history.start();
 });

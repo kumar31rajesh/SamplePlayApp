@@ -1,0 +1,126 @@
+ <style>
+li.droppable {
+    height: 100px;
+    width: 100px;
+    background-color: #FF0000;
+    margin-top: 20px;
+}
+
+li.draggable {
+    margin: 40px 0;
+}
+li.draggable a {
+    padding: 15px;
+    border: 1px solid;
+}
+
+</style>
+ 
+ <div class="mainy" style="margin-left:0px;">
+ 	<div class="row">
+                                 
+                      <div class="col-md-12" >
+					
+                        <div class="panel panel-default">
+  									<!-- <div class="panel-heading">
+ 								
+  
+  									</div> -->
+  
+   									<div class="panel-body">
+  
+                            		<div class="row">
+                            			<div class="col-md-3">
+                            				<select class="form-control" style="margin: 10px 0 ;" id="dataSets">
+                            				
+                            				</select>
+                            				 <div class="awidget" style="height: 765px; overflow:auto;" id="columnsGroup">
+                            				 </div>
+                            		
+                            			</div>
+                            			<div class="col-md-9">
+                            					<div class="awidget" style="min-height: 500px;" >
+                            						<div class="row">
+                            						 <div class="col-md-4" id="measuresCol" style="height: 500px;overflow:auto;">
+                            							 <div class="panel panel-default">
+                            							 	<div class="panel-heading">
+                            							 	Drop Fields to Filters
+ 														    </div>
+ 														    <div class="panel-body">
+ 														    </div>
+                            							 </div>
+                            							 
+                            						 </div>
+                            						 <div class="col-md-8" id="dimensionCol" style="height: 500px;overflow:auto;">
+                            						 <div class="panel panel-default">
+                            							 	<div class="panel-heading">
+                            							 	<div class="pull-left">
+      														Filters
+    								</div>
+    								<div class="btn-group pull-right">
+      								<a href="javascript:void(0)" class="btn btn-default btn-sm" id="addFilter"  >Add</a>
+    								</div>
+
+  									<div class="clearfix"></div>
+ 														    </div>
+ 														    <div class="panel-body">
+ 														    <div class="row" >
+ 														    	<div class="col-md-12" id="filters">
+ 														    	</div>
+ 														    </div>
+ 														    </div>
+                            							 </div>
+                            						 </div>
+                            						</div>
+                            				    </div>
+                            				    <div class="awidget" style="min-height: 280px;">
+                            				    	<div class="row" id="filter1">
+                            				    		<div class="col-md-3" >
+                            				    			<select class="form-control" style="margin: 10px 0 ;" id="dataSet1">
+                            				
+                            								</select>
+                            				    		</div>
+                            				    		<div class="col-md-2" >
+                            				    			<select class="form-control" style="margin: 10px 0 ;" id="dataSet1Col" >
+                            				
+                            								</select>
+                            				    		</div>
+                            				    		<div class="col-md-2" >
+                            				    			<select class="form-control" style="margin: 10px 0 ;" >
+                            									<option value="">=</option>
+                            									<option value="">>=</option>
+                            									<option value=""><=</option>
+                            									<option value="">INNER JOIN</option>
+                            									<option value="">LEFT OUTERJOIN</option>
+                            									<option value="">RIGHT OUTERJOIN</option>
+                            								</select>
+                            				    		</div>
+                            				    		<div class="col-md-3" >
+                            				    			<select class="form-control" style="margin: 10px 0 ;" id="dataSet2">
+                            				
+                            								</select>
+                            				    		</div>
+                            				    		<div class="col-md-2" >
+                            				    			<select class="form-control" style="margin: 10px 0 ;" id="dataSet2Col">
+                            				
+                            								</select>
+                            				    		</div>
+                            				    	</div>
+                            				    	<div class="row" style="padding-top:5px;">
+                            				    		<div class="col-md-12"><div></div><div class="pull-right"><button class="btn btn-default btn-primary" id="addMore">Add More..</button></div></div>
+                            				    	</div>
+                            				    </div>
+                            			</div>
+                            		</div>
+
+      								</div>
+  
+						</div>
+                                     
+                                    </div>
+                                   
+	</div> 
+	<div class="row">
+		<div class="col-md-12"><div class="pull-left"></div><div class="pull-right"><button class="btn btn-default btn-primary" id="executeQuery">Execute</button></div></div>
+	</div> 
+</div>

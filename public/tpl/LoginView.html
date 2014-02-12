@@ -1,91 +1,63 @@
-      <div class="container" >  
-        <div class="row ">
-     <div class="status-bar"> 
-    <div class="span5 offset3">
-        <div class="alert alert-error" style="display: none">
-            Invalid UserName and Password 
-        </div>
-    </div>
-    </div>
-
-          <div class="span5 offset3">
-            <h4 class="widget-header"><%= message %></h4>
-            <div class="widget-body">
-              <div class="center-align">
-          		<form id="login-form">
-          		
-          		<div class="form-horizontal form-signin-signup" >
-                <div class="control-group">
-                  <i class="icon-user"></i>
-                  <input type="text" name="email" placeholder="Email" id="email" >
-                  <span class="help-inline"></span>
-                </div>
-                <div class="control-group">
-                 <i class="icon-lock"></i>
-                  <input type="password" name="password" placeholder="Password" id="password">
-                  <span class="help-inline"></span>
-                </div>
-                <div class="control-group">
-                <i class="icon-globe"></i>
-                  <input type="text" name="domain" placeholder="Domain" id="domain">
-                  <span class="help-inline"></span>
-                </div>
-                <div class="control-group">
-                  <div class="remember-me">
-                    <div class="pull-left">
-                      <label class="checkbox">
-                        <input type="checkbox"> Remember me
-                      </label>
-                    </div>
-                    <div class="pull-right">
-                      <a href="#">Forgot password?</a>
-                    </div>
-                    <div class="clearfix"></div>
-                  </div>
-</div>
-                 <div class="control-group">
-                  <input type="submit" value="Signin" class="btn btn-primary btn-sm" id="login">
-                  </div>
-                  <!--  <div class="control-group">
-                  <a href="#SignUp">New User Click here to Register</a>
-                  </div> -->
-                </div></form>	
-                
-                
-                <!-- <h4><i class="icon-question-sign"></i> Don't have an account?</h4>
-                <a href="signup.html" class="btn btn-large bottom-space">Signup</a>
-                <h4><i class="icon-thumbs-up"></i> Sign in with third party account</h4> 
-                <ul class="signin-with-list">
-                  <li>
-                    <a class="btn-twitter">
-                      <i class="icon-twitter icon-large"></i>
-                      Signin with Twitter
-                    </a>
-                  </li>
-                  <li>
-                    <a class="btn-facebook">
-                      <i class="icon-facebook icon-large"></i>
-                      Signin with Facebook
-                    </a>
-                  </li>
-                  <li>
-                    <a class="btn-google">
-                      <i class="icon-google-plus icon-large"></i>
-                      Signin with Google
-                    </a>
-                  </li>
-                  <li>
-                    <a class="btn-github">
-                      <i class="icon-github icon-large"></i>
-                      Signin with Github
-                    </a>
-                  </li>
-                </ul> 
-                -->
-                
-                
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+					 <div class="col-md-12"> 
+    					<div class="status-bar ">
+        					<div class="alert alert-error center-block" style="display: none">
+            					Invalid UserName and Password 
+        					</div>
+    					</div>
+    				</div>
+                     <div class="col-md-12">
+                        <div class="awidget login-reg">
+                           <div class="awidget-head">
+                           
+                           </div>
+                           <div class="awidget-body">
+                              <!-- Page title -->
+                              <div class="page-title text-center">
+                                 <h2>Login</h2>
+                                 <hr />
+                              </div>
+                              <!-- Page title -->
+                              
+                              <br />
+                              <form class="form-horizontal" role="form" id="login-form">
+                                <div class="form-group">
+                                  <label for="inputEmail1" class="col-lg-2 control-label" >Email</label>
+                                  <div class="col-lg-10">
+                                    <input type="email" class="form-control" id="email" placeholder="Email" name="email">
+                                    <span class="help-inline"></span>
+                                  </div>
+                                </div>
+                                <div class="form-group">
+                                  <label for="inputPassword1" class="col-lg-2 control-label">Password</label>
+                                  <div class="col-lg-10">
+                                    <input type="password" class="form-control" id="password" placeholder="Password" name="password">
+                                    <span class="help-inline"></span>
+                                  </div>
+                                </div>
+                                <div class="form-group">
+                                  <label for="inputDomain1" class="col-lg-2 control-label">Domain</label>
+                                  <div class="col-lg-10">
+                                    <input type="password" class="form-control" id="domain" placeholder="domain">
+                                    <span class="help-inline"></span>
+                                  </div>
+                                </div>
+                                <div class="form-group">
+                                  <div class="col-lg-offset-2 col-lg-10">
+                                    <div class="checkbox">
+                                      <label>
+                                        <input type="checkbox"> Remember me
+                                      </label>
+                                    </div>
+                                  </div>
+                                </div>
+                                <hr />
+                                <div class="form-group">
+                                  <div class="col-lg-offset-2 col-lg-10">
+                                    <button type="submit" class="btn btn-info" >Sign in</button>
+                                    <button type="reset" class="btn btn-default">Reset</button>
+                                  </div>
+                                </div>
+                              </form>
+                           </div>
+                        </div>
+                     </div>
