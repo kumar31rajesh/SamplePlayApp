@@ -171,6 +171,26 @@ window.Projects=Backbone.Collection.extend({
 	
 });
 
+window.DataSet=Backbone.Model.extend({
+	
+	defaults:{
+		label:"",
+		name:"",
+		path:"",
+		type:""
+	}
+	
+});
+
+window.DataSetCollection=Backbone.Collection.extend({
+	
+	model: DataSet,
+	url: function(){
+		return "/api/dataSource/"+this.searchTerm;
+		}
+	
+});
+
 
 
 

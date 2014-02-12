@@ -11,6 +11,8 @@ var templateNode = _.template('\
     </ul>\
   	');
 
+
+
 var NodeView  = Marionette.CompositeView.extend({
   tagName: "li",
   className: "tree-view-node",

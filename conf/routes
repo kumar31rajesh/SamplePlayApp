@@ -22,5 +22,6 @@ POST /api/validateAdmin     controllers.AppController.validateAdmin()
 POST /api/saveUser     controllers.AppController.saveUserDetails()
 POST /api/uplaodDataSourceCSVFile     controllers.AppController.uplaodDataSourceCSVFile()
 
-GET  /api/details/:id     controllers.AppController.details(id :String)
+POST  /api/details     controllers.AppController.details()
+GET  /api/dataSource/:label controllers.AppController.dataSource(label :String)
 GET  /api/hierarchy     controllers.AppController.getHirarchy()

@@ -13,7 +13,7 @@ window.LoginView = Backbone.View.extend({
     },
     events: {
     	"change"        : "change",
-        "click #login"   : "login"
+        "submit #login-form"   : "login"
     },
     change: function (event) {
        
@@ -71,6 +71,9 @@ window.LoginView = Backbone.View.extend({
     		
     		utils.displayValidationErrors(validate.messages);	
     	}
+    	
+    	
+    	return false;
 
     }
 

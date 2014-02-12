@@ -119,6 +119,10 @@ window.ProjectTreeView  = Marionette.CollectionView.extend({
 	  }
 	});
 
+
+
+var objHierarchArray=new Array();
+
 window.ProjectView=Backbone.View.extend({
    
     initialize: function() {
@@ -177,6 +181,7 @@ window.ProjectView=Backbone.View.extend({
      
         
         this.$('#sidebar-content').html(new ProjectTreeView({ collection: this.generateFolderTree(data)}).render().el);
+  
         
         
        return this;
@@ -184,11 +189,14 @@ window.ProjectView=Backbone.View.extend({
     generateFolderTree:function(data){
     	
     	var folderObj=new Array();
+
     		
     	if(data.length>0){
     		
     		for(var i=0;i<data.length;i++){
+    			
         		folderObj[i]=new Tree({label:data[i].label,id:data[i].id,children:this.generateFolderTree(data[i].children)});
+        	 			
         	}	
     		
     		return new Trees(folderObj);
@@ -207,9 +215,25 @@ window.DataSourceView=Backbone.View.extend({
         this.render();
     },
     render: function() {
-    		
-        $(this.el).html(this.template());
+
+       $(this.el).html(this.template(this.model.toJSON()));
             
+        return this;
+    }
+    
+ });
+
+
+window.DataSourceListingView=Backbone.View.extend({
+	tagName:"tr",
+	
+    initialize: function() {
+        this.render();
+    },
+    render: function() {
+    	
+    	$(this.el).append("<td>"+this.model.get("name")+"</td><td>"+this.model.get("type")+"</td><td><a =\"#dataSourceEdit\"><i class=\"icon-edit\"></i></a></td><td><a =\"#dataSourceEdit\"><i class=\"icon-remove\"></i></a></td>");
+    	
         return this;
     }
     
@@ -223,7 +247,7 @@ window.DataSourceCreateView=Backbone.View.extend({
     },
     render: function() {
     		
-        $(this.el).html(this.template());
+        $(this.el).html(this.template(this.model.toJSON()));
             
         return this;
     },
@@ -238,20 +262,28 @@ window.DataSourceCreateView=Backbone.View.extend({
             url: "/api/uplaodDataSourceCSVFile",
             type: "POST",
             data: formData,
-            async: false,
+            async: true,
             beforeSend: function(){
-            	//$("#LoadingImage").show();
-            	$("#LoadingImage").css('display', 'block');
+            	
+            	$("#myModal").modal('show');
+            	
+            	$('#myModal .bar').css('width','30%');
+            	
+            	setTimeout(function() {
+                  
+            		$('#myModal .bar').css('width','80%'); 
+            	
+                }, 1000);
             
             	},
             
             complete: function(xhr){
             	
-            	$("#LoadingImage").css('display', 'none');
+            	$("#myModal").modal('hide');
             	},
             error: function(xhr){
                
-            	$("#LoadingImage").css('display', 'none');
+            	$("#myModal").modal('hide');
                 	},
            
             cache: false,

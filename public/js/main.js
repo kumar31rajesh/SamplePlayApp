@@ -6,11 +6,11 @@ var AppRouter = Backbone.Router.extend({
     	"signup":"validateAdmin",
     	"home":"homepage",
     	"home/details/:id":"detailsView",
-    	"projects/datasourcelist/:label":"displayDataSourceView",
+    	"projects/datasourcelist/:label":"displayDataSourceList",
     	"projects":"displayProjectsList",
     	"meshup":"displayMeshUp",
     	"products/source/:id":"displayProductSource",
-    	"projects/createDataSource":"ProductDataSource"
+    	"projects/createDataSource/:id":"createDataSource"
     },
 
     initialize: function () {
@@ -21,32 +21,84 @@ var AppRouter = Backbone.Router.extend({
         $('.page-footer').html(this.footerView.el);        
     },
     detailsView: function (id) {	
+    self=this;
 
-    
+    	$("#myModal").modal('show');
+    	
+    	$('#myModal .bar').css('width','30%');
     	  $.ajax({
-              type: "GET", 
-              url: "/api/details/"+id, 
+              type: "POST", 
+              url: "/api/details", 
               dataType:"json",
+              data:{dataid:id,datacolumns:null},
               success: function (response) {
-            	  $('#page-content-wrapper').html( '<div id="filters_wrappers"></div> <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered" id="example"></table>' );
-                  var otable=$('#example').dataTable({
-                	 "sScrollY": "380px",
-                	 "sScrollX": "965px",
-                	 "bProcessing": true,
-             		 "bServerSide": true,
-              		 "bPaginate": false,
-              		 "aoColumns":response.aoColumns,
-              		 "sAjaxSource": "/api/details/"+id,
-                     "sDom": "frtiS",
-                     "oScroller": {
-                        "displayBuffer": 10
-                      }
-                  });  
+            	  
+            	  $("#myModal").modal('hide');
+            	  
+            	  var columnsfilters="<select multiple=\"multiple\" id=\"columnfilters\"><option value=\"all\" selected>All</option>";
+            	   
+            	  for(var i=0;i<response.aoColumns.length;i++){
+            		  columnsfilters=columnsfilters+"<option vaule='"+response.aoColumns[i].mData+"'>"+response.aoColumns[i].sTitle+"</option>" ;
+            	  }
+            	  columnsfilters=columnsfilters+"</select>";
+            	  
+            	  
+            	  $('#page-content-wrapper').html( '<div class="row" ><div id="filters_wrappers" class="pull-left"></div><div class="pull-right"><div class="btn btn-default btn-sm">GO</div></div></div> <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered" id="example"></table>' );
+            	  $('#filters_wrappers').append(columnsfilters);
+            	  
+            	  $('#example').dataTable({
+            	       	 "sScrollY": "380px",
+            	       	 "sScrollX": "965px",
+            	     	 "bPaginate": false,
+            	     	 "aoColumns":response.aoColumns,
+            	     	 "aaData":response.aaData
+            	         });
+            	 
               },
               error: function(){
-            	  
+            	  $("#myModal").modal('hide');
               }
           });
+    	  
+    	  $('body').on('click', '.btn', function () {
+    		  
+    		  
+    		  
+      		   
+      		var columnName ; 
+      		$('#columnfilters :selected').each(function(i, selected){ 
+      			columnName=columnName+","+$(selected).val();		     
+      		 });
+  	     	
+      		$("#myModal").modal('show');
+         	
+         	$('#myModal .bar').css('width','30%');
+         	
+  	     	 $.ajax({
+  	              type: "POST", 
+  	              url: "/api/details", 
+  	              dataType:"json",
+  	              data:{dataid:id,datacolumns:columnName},
+  	              success: function (response) {
+  	            	  $("#myModal").modal('hide');
+  	            	  
+  	            	  $('#example').dataTable({
+  	            	       	 "sScrollY": "380px",
+  	            	       	 "sScrollX": "965px",
+  	            	     	 "bPaginate": false,
+  	            	     	 "aoColumns":response.aoColumns,
+  	            	     	 "aaData":response.aaData
+  	            	     	 
+  	            	         });
+  	            	 
+  	              },
+  	              error: function(){
+  	            	  $("#myModal").modal('hide');
+  	              }
+  	          });
+      	
+      		   
+     				});
     	  
     	  $('body').on('mouseover', '.table thead tr th', function () {
     		
@@ -77,6 +129,13 @@ var AppRouter = Backbone.Router.extend({
  
     	
     },
+    datatablefilters:function(columns,id){
+    	
+    		
+  
+     
+ 	  
+    },
     validateAdmin:function(){
     	this.authmodel=new Authentication();
     	this.adminAuthenticate=new AdminAuthenticationView({model:this.authmodel});
@@ -106,13 +165,37 @@ var AppRouter = Backbone.Router.extend({
 		$(".content").html((new MeshUpView).el);
 		this.headerView.selectMenuItem('meshup');
 	},
-	ProductDataSource:function(label){
-		
-		$('#page-content').html((new DataSourceCreateView()).el);
+	createDataSource:function(label){
+		this.dataset=new DataSet();
+		this.dataset.set("label",label);
+		$('#page-content').html((new DataSourceCreateView({model:this.dataset})).el);
 	},
-	displayDataSourceView:function(label){
-			
-		 $('#page-content').html((new DataSourceView()).el);
+	displayDataSourceList:function(label){
+		
+		this.dataset=new DataSet();
+		this.dataset.set("label",label);
+		
+		 
+		 $('#page-content').html((new DataSourceView({model:this.dataset})).el);
+		 
+		 this.datasetCollection=new DataSetCollection();
+		 this.datasetCollection.searchTerm=label;
+	     this.datasetCollection.fetch({
+	            success: function (collection, response) {
+	                
+	                collection.each(function(model){
+	                	$('#datasourcelist tbody').append((new DataSourceListingView({model:model})).el);
+	                	
+	                })
+	            
+	            },
+	            error: function (collection, response) {
+	            		console.log('asd');
+	            }
+	        });
+	     
+	     //
+	    
 	}
   
 });

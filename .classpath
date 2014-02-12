@@ -120,7 +120,6 @@
 	<classpathentry kind="lib" path="/home/cerrid/play-2.2.0/repository/local/org.easytesting/fest-util/1.1.6/jars/fest-util.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="/home/cerrid/play-2.2.0/framework/sbt/boot/scala-2.10.2/lib/scala-library.jar"/>
-	<classpathentry kind="lib" path="lib/cerrid-analytics-es-1.0.jar" sourcepath="/cerrid-etl"/>
 	<classpathentry kind="lib" path="lib/commons-beanutils-1.8.3.jar"/>
 	<classpathentry kind="lib" path="lib/commons-codec-1.4.jar"/>
 	<classpathentry kind="lib" path="lib/commons-collections-3.2.1.jar"/>
@@ -153,5 +152,6 @@
 	<classpathentry kind="lib" path="lib/opencsv-2.3.jar"/>
 	<classpathentry kind="lib" path="lib/slf4j-api-1.6.1.jar"/>
 	<classpathentry kind="lib" path="lib/slf4j-log4j12-1.6.1.jar"/>
+	<classpathentry kind="lib" path="/home/cerrid/cerrid/codebase/cerrid-app/lib/cerrid-analytics-es-1.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

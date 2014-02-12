@@ -2,13 +2,19 @@ package filters;
 
 
 import java.io.File;
+import java.io.IOException;
+import java.util.List;
+import java.util.Map;
 
 import play.mvc.Http.MultipartFormData;
 import play.mvc.Http.MultipartFormData.FilePart;
 import play.mvc.Http.RequestBody;
+import models.DataSet;
 import models.User;
 
+import com.cerrid.model.collections.DataMart;
 import com.fasterxml.jackson.databind.JsonNode;
+import com.google.common.io.Files;
 
 import controllers.MorphiaObject;
 
@@ -67,24 +73,76 @@ public class ApplicationServices {
 		
 		return issaved;
 	}
+	
+	
+	public static List<DataMart> getLoanDetails(Long id) {
+		List<DataMart> loandata = null;
+		if (MorphiaObject.datastore != null) {
+			loandata = MorphiaObject.datastore.find(DataMart.class).asList();
+		}
+		return loandata ;
+	}
+	
+	public static List<DataMart> getHirarchy() {
+		List<DataMart> hi = null;
+		
+		if (MorphiaObject.datastore != null) {
+			hi = MorphiaObject.datastore.find(DataMart.class).asList();
+		}
+		return hi ;
+		
+	}
 
 	public static boolean uploadCSVFile(MultipartFormData body) {
 		// TODO Auto-generated method stub
-		FilePart picture = body.getFile("picture");
 		
-		try{
-		System.out.println("file>>>>>"+picture);
-		  if (picture != null) {
-		    String fileName = picture.getFilename();
-		    String contentType = picture.getContentType(); 
-		    File file = picture.getFile();
+		FilePart file = body.getFile("filepath");
+		Map<String,String[]>  fileinfo=body.asFormUrlEncoded();
+	
+		File outFile = null;
+		DataSet dataset=null;
+		
+		boolean uploaded=false;
+		  if (file != null) {
+		    File inFile = file.getFile();
+		    outFile = new File("/home/cerrid/cerrid/UploadedFiles/" + file.getFilename());
 		    
-		  } 
+		    try {
+		    	System.out.println(fileinfo.get("dslabel")[0]+""+fileinfo.get("dsname")[0]+""+fileinfo.get("dstype")[0]);
+				Files.copy(inFile, outFile);
+				
+				if (MorphiaObject.datastore != null) {
+					
+					dataset=MorphiaObject.datastore.find(DataSet.class).filter("name",fileinfo.get("dsname")[0]).get() ;
+					if(dataset==null)
+					{
+						dataset=new DataSet();	
+						dataset.setLabel(fileinfo.get("dslabel")[0]);
+						dataset.setName(fileinfo.get("dsname")[0]);
+						dataset.setType(fileinfo.get("dstype")[0]);;
+						MorphiaObject.datastore.save(dataset);
+					}
+					
+					uploaded=true;
+					
+													}
+				
+				
+				 }catch (IOException e1) {
+					e1.printStackTrace();
+										}
+		
+		  					}
 		  
-		}catch(Exception e){
-			e.printStackTrace();
-		}
-		  return true;
+		  return uploaded ;
 	}
 
+	public static List<DataSet> getDataSourceList(String label) {
+		// TODO Auto-generated method stub
+		List<DataSet> dataset = null;
+		if (MorphiaObject.datastore != null) {
+			dataset = MorphiaObject.datastore.find(DataSet.class).filter("label",label).asList();
+		}
+		return dataset ; 
+	}
 }
