@@ -64,7 +64,7 @@ public class ApplicationServices {
 		if (MorphiaObject.datastore != null) {
 			System.out.println(asJson.get("email").asText());
 			user = MorphiaObject.datastore.find(User.class)
-					.filter("email", asJson.get("email").asText()).get();
+					.filter("username", asJson.get("email").asText()).get();
 			if ((user==null)) {
 				user=new User();
 				user.setUsername(asJson.get("email").asText());
