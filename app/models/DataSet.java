@@ -4,7 +4,9 @@ public class DataSet {
 	
 	private  String label ;
 	private  String name ;
+
 	private  String type ;
+
 	private String filepath;
 	
 	
