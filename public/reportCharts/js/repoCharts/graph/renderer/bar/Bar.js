@@ -73,10 +73,11 @@ RepoCharts.Graph.Renderer.Bar = RepoCharts.Class.create( RepoCharts.Graph.Render
 				.enter().append("svg:rect")
 				.attr("x", function(d) { return graph.x(d.x) + barXOffset; })
 				.attr("y", function(d) { return (graph.y(d.y0 + Math.abs(d.y))) * (d.y < 0 ? -1 : 1 ); })
-				.text(function(d) { return d.name; })
 				.attr("width", seriesBarWidth)
 				.attr("height", function(d) { return graph.y.magnitude(Math.abs(d.y)); })
 				.attr("transform", transform);
+			
+			
 
 			Array.prototype.forEach.call(nodes[0], function(n) {
 				n.setAttribute('fill', series.color);

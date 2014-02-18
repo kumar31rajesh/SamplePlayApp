@@ -836,7 +836,12 @@ window.DataSetsBuilderView=Backbone.View.extend({
                 ev.preventDefault();
             },
           "click #addFilter":"addFilters",
-          "click #addMore":"addMoreFilters"
+          "click #addMore":"addMoreFilters",
+          "click #executeQuery":"executeQuery"
+    },
+    executeQuery: function(e){
+        e.preventDefault();
+        console.log(this.dropedfields);
     },
     renderColumns:function(e){
     	self=this;
