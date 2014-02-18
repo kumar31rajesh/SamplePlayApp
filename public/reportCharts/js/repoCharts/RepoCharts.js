@@ -2,11 +2,8 @@
 var RepoCharts = {
 
 	namespace: function(namespace, obj) {
-
 		var parts = namespace.split('.');
-
 		var parent = RepoCharts;
-
 		for(var i = 1, length = parts.length; i < length; i++) {
 			var currentPart = parts[i];
 			parent[currentPart] = parent[currentPart] || {};

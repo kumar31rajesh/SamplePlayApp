@@ -9,7 +9,7 @@ import com.google.code.morphia.annotations.Id;
 public class User {
 	@Id
 	private ObjectId _id;
-	private String email;
+	private String username;
 	private String password;
 	private String domain;
 
@@ -20,11 +20,12 @@ public class User {
 		this._id = _id;
 	}
 	
-	public String getEmail() {
-		return email;
+	public String getUsername() {
+		return username;
 	}
-	public void setEmail(String email) {
-		this.email = email;
+
+	public void setUsername(String username) {
+		this.username = username;
 	}
 	public String getPassword() {
 		return password;

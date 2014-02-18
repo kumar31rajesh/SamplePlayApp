@@ -135,11 +135,11 @@ window.ProjectView=Backbone.View.extend({
         
         var data=[
                   {
-                      "label": "Project1",
+                      "label": "Cerrid",
                       "id": 1,
                       "children": [
                           {
-                              "label": "Folder1",
+                              "label": "loan",
                               "id": 11,
                               "children": [
                                   {
@@ -150,28 +150,28 @@ window.ProjectView=Backbone.View.extend({
                               ]
                           },
                           {
-                              "label": "Folder2",
+                              "label": "Bond",
                               "id": 20,
                               "children": []
                           }
                       ]
                   }, {
-                      "label": "Project2",
+                      "label": "MyData",
                       "id": 2,
                       "children": [
                           {
-                              "label": "Folder1",
+                              "label": "MasterLoan",
                               "id": 22,
                               "children": [
                                   {
-                                      "label": "LoanData",
+                                      "label": "MasterLoanData",
                                       "id": 222,
                                       "children": []
                                   }
                               ]
                           },
                           {
-                              "label": "Folder2",
+                              "label": "MasterBond",
                               "id": 25,
                               "children": []
                           }
