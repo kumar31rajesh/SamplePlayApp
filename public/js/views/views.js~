@@ -504,11 +504,11 @@ window.ProjectsView = Backbone.View.extend({
     
     var data=[
               {
-                  "label": "Cerrid",
+                  "label": "Project1",
                   "id": 1,
                   "children": [
                       {
-                          "label": "loan",
+                          "label": "Folder1",
                           "id": 11,
                           "children": [
                               {
@@ -519,28 +519,28 @@ window.ProjectsView = Backbone.View.extend({
                           ]
                       },
                       {
-                          "label": "Bond",
+                          "label": "Folder2",
                           "id": 20,
                           "children": []
                       }
                   ]
               }, {
-                  "label": "MyData",
+                  "label": "Project2",
                   "id": 2,
                   "children": [
                       {
-                          "label": "MasterLoan",
+                          "label": "Folder1",
                           "id": 22,
                           "children": [
                               {
-                                  "label": "MasterLoanData",
+                                  "label": "LoanData",
                                   "id": 222,
                                   "children": []
                               }
                           ]
                       },
                       {
-                          "label": "MasterBond",
+                          "label": "Folder2",
                           "id": 25,
                           "children": []
                       }
@@ -836,7 +836,12 @@ window.DataSetsBuilderView=Backbone.View.extend({
                 ev.preventDefault();
             },
           "click #addFilter":"addFilters",
-          "click #addMore":"addMoreFilters"
+          "click #addMore":"addMoreFilters",
+          "click #executeQuery":"executeQuery"
+    },
+    executeQuery: function(e){
+        e.preventDefault();
+        console.log(this.dropedfields);
     },
     renderColumns:function(e){
     	self=this;
