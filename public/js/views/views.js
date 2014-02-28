@@ -100,9 +100,7 @@ window.AdminAuthenticationView = Backbone.View.extend({
         
         this.model.save({},
         		{
-            success: function(model, response) {
-            	
-      
+            success: function(model, response) {     
             	
             	if(response.isValid=="True"){
             	
@@ -693,7 +691,7 @@ window.DataSourceCreateView=Backbone.View.extend({
     	$("#myModal").modal('show');
    
         $.ajax({
-            url: "/api/uplaodDataSourceCSVFile",
+            url: "/api/uploadDataSourceCSVFile",
             type: "POST",
             data: formData,
             async: true,

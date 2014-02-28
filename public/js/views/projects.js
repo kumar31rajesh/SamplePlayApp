@@ -259,7 +259,7 @@ window.DataSourceCreateView=Backbone.View.extend({
     	var formData = new FormData($("#uplaoadForm")[0]);
    
         $.ajax({
-            url: "/api/uplaodDataSourceCSVFile",
+            url: "/api/uploadDataSourceCSVFile",
             type: "POST",
             data: formData,
             async: true,

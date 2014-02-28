@@ -12,6 +12,7 @@ import java.util.Map;
 
 import models.DataSet;
 import models.User;
+import models.datasource.DataSource;
 import play.Play;
 import play.mvc.Http.MultipartFormData;
 import play.mvc.Http.MultipartFormData.FilePart;
@@ -116,25 +117,30 @@ public class ApplicationServices {
 		FilePart file = body.getFile("filepath");
 		Map<String,String[]>  fileinfo=body.asFormUrlEncoded();
 		File outFile = null;
-		DataSet dataset=null;
+		DataSource datasource = null;
 		boolean uploaded = false;
 		  if (file != null) {
 		    File inFile = file.getFile();
 			outFile = new File(fsinboundstore + file.getFilename());
 		    try {
-		    	System.out.println(fileinfo.get("dslabel")[0]+""+fileinfo.get("dsname")[0]+""+fileinfo.get("dstype")[0]);
+				System.out.println(fileinfo.get("dslabel")[0] + "--"
+						+ fileinfo.get("dsname")[0] + "--"
+						+ fileinfo.get("dstype")[0]);
 				Files.copy(inFile, outFile);
 				if (MorphiaObject.datastore != null) {
-					dataset = MorphiaObject.datastore.find(DataSet.class)
+					datasource = MorphiaObject.datastore.find(DataSource.class)
 							.filter("name", fileinfo.get("dsname")[0]).get();
-					if(dataset==null)
+					if (datasource == null)
 					{
-						dataset=new DataSet();	
-						dataset.setLabel(fileinfo.get("dslabel")[0]);
-						dataset.setName(fileinfo.get("dsname")[0]);
-						dataset.setType(fileinfo.get("dstype")[0]);
-						dataset.setFilepath(fsinboundstore + file.getFilename());
-						MorphiaObject.datastore.save(dataset);
+						Map<String, String> configParams = new HashMap<>();
+						configParams.put("filePath",
+								fsinboundstore + file.getFilename());
+						configParams.put("label", fileinfo.get("dslabel")[0]);
+						datasource = new DataSource();
+						datasource.setName(fileinfo.get("dsname")[0]);
+						datasource.setType(fileinfo.get("dstype")[0]);
+						datasource.setConfigParameters(configParams);
+						MorphiaObject.datastore.save(datasource);
 					}
 					uploaded = true;
 				}

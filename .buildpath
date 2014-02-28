@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<buildpath>
+	<buildpathentry kind="src" path="app"/>
+	<buildpathentry kind="src" path="test"/>
+	<buildpathentry kind="con" path="org.eclipse.dltk.mod.launching.INTERPRETER_CONTAINER"/>
+	<buildpathentry kind="con" path="org.eclipse.vjet.eclipse.core.JSNATIVE_CONTAINER/JS Native Types"/>
+	<buildpathentry kind="con" path="org.eclipse.vjet.eclipse.core.BROWSER_CONTAINER/Browser SDK"/>
+	<buildpathentry external="true" kind="lib" path="/home/prabhat/cerrid/platform/play-2.2.1/repository/local/com.typesafe.play/play_2.10/2.2.1/jars/play_2.10.jar"/>
+	<buildpathentry external="true" kind="lib" path="/home/prabhat/cerrid/platform/play-2.2.1/repository/local/org.specs2/specs2_2.10/2.1.1/jars/specs2_2.10.jar"/>
+	<buildpathentry external="true" kind="lib" path="/home/prabhat/cerrid/platform/play-2.2.1/repository/local/org.seleniumhq.selenium/selenium-java/2.32.0/jars/selenium-java.jar"/>
+	<buildpathentry external="true" kind="lib" path="/home/prabhat/cerrid/platform/play-2.2.1/repository/local/org.seleniumhq.selenium/selenium-safari-driver/2.32.0/jars/selenium-safari-driver.jar"/>
+</buildpath>

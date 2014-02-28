@@ -12,8 +12,6 @@ import play.mvc.Controller;
 import play.mvc.Http.MultipartFormData;
 import play.mvc.Result;
 
-import com.cerrid.analytics.service.ReportingService;
-import com.cerrid.model.accessor.exception.DBQueryExecuteException;
 import com.cerrid.model.collections.DataMart;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.google.gson.Gson;
@@ -58,25 +56,19 @@ public class AppController extends Controller {
 		return ok(dataTableData);
 	}
 
-public static Result dataSource(String label){
-	
+	public static Result dataSource(String label) {
 		List<DataSet> dataSourcelist = ApplicationServices.getDataSourceList(label);
-		
-	
-	String jsonRepresentation = "";
-	
+		String jsonRepresentation = "";
 		if (dataSourcelist != null) {
 		Gson gson = new GsonBuilder().excludeFieldsWithModifiers(Modifier.PROTECTED).create();
 			jsonRepresentation = gson.toJson(dataSourcelist);
 		}
-	
-	return ok(jsonRepresentation);
+		return ok(jsonRepresentation);
 	
 }
 
 public static Result getHirarchy(){
-	
-	List<DataMart> dataMarts = ApplicationServices.getHirarchy();
+		List<DataMart> dataMarts = ApplicationServices.getHirarchy();
 	List<Hierarchy> hiearchy = new ArrayList<>();
 	for (DataMart hierarchy2 : dataMarts) {
 		Hierarchy h1 = new Hierarchy();
@@ -84,14 +76,11 @@ public static Result getHirarchy(){
 		h1.setLabel(hierarchy2.getName());
 		hiearchy.add(h1);
 	}
-
 String jsonRepresentation = "";
-
 	if (hiearchy != null) {
 	Gson gson = new GsonBuilder().excludeFieldsWithModifiers(Modifier.PROTECTED).create();
 		jsonRepresentation = gson.toJson(hiearchy);
 	}
-
 return ok(jsonRepresentation);
 
 }
@@ -128,7 +117,7 @@ public static Result saveUserDetails() {
 	
 }
 
-public static Result uplaodDataSourceCSVFile() {
+	public static Result uploadDataSourceCSVFile() {
 	
 
 	MultipartFormData body = request().body().asMultipartFormData();
