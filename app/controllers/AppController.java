@@ -69,7 +69,7 @@ public class AppController extends Controller {
 
 public static Result getHirarchy(){
 		List<DataMart> dataMarts = ApplicationServices.getHirarchy();
-	List<Hierarchy> hiearchy = new ArrayList<>();
+	List<Hierarchy> hiearchy = new ArrayList<Hierarchy>();
 	for (DataMart hierarchy2 : dataMarts) {
 		Hierarchy h1 = new Hierarchy();
 		h1.setId(hierarchy2.getId().toString());

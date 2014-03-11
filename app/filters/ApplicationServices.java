@@ -132,7 +132,7 @@ public class ApplicationServices {
 							.filter("name", fileinfo.get("dsname")[0]).get();
 					if (datasource == null)
 					{
-						Map<String, String> configParams = new HashMap<>();
+						Map<String, String> configParams = new HashMap<String, String>();
 						configParams.put("filePath",
 								fsinboundstore + file.getFilename());
 						configParams.put("label", fileinfo.get("dslabel")[0]);
