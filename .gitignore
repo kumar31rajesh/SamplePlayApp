@@ -2,7 +2,8 @@ target*
 test*
 .target*
 logs*
-project*
+project/project/*
+project/target/*
 /bin
 .settings/*
 .classpath
