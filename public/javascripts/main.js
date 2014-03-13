@@ -30,4 +30,4 @@ require.config({
   }
 });
 
-define(['app']);
+require(['app']);

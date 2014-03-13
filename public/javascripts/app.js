@@ -2,14 +2,14 @@
 define(function(require){
     var Bootstrap = require('bootstrap');
     var Marionette = require('marionette');
-    var HomeView = require('app/views/home');
-    var NavigationView = require('app/views/navigation');
+    var MainLayout = require('app/views/mainLayout');
+    var HeaderLayout = require('app/views/headerLayout');
     
     var CerridApp = new Marionette.Application();
 
     CerridApp.addRegions({
         mainRegion: "#main-region",
-        navigationRegion: "#navigation"
+        navigationRegion: "#header-region"
     });
     
     CerridApp.Router = Marionette.AppRouter.extend({
@@ -19,10 +19,10 @@ define(function(require){
         
         controller: {
             home: function(){
-                var homeView = new HomeView();
-                var navigationView = new NavigationView();
-                CerridApp.mainRegion.show(homeView);
-                CerridApp.navigationRegion.show(navigationView);
+                var mainLayout = new MainLayout();
+                var headerLayout = new HeaderLayout();
+                CerridApp.mainRegion.show(mainLayout);
+                CerridApp.navigationRegion.show(headerLayout);
                 
             }
         }

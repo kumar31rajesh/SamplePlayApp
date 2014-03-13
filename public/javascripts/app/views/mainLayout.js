@@ -1,14 +1,14 @@
 
 define(function(require){
     var Marionette = require('marionette');
-    var HomeTemplate = require('tpl!tmpl/home.html');
+    var MainLayoutTemplate = require('tpl!tmpl/mainLayout.html');
     
-    var HomeView = Marionette.ItemView.extend({
-        template: HomeTemplate,
+    var MainLayout = Marionette.Layout.extend({
+        template: MainLayoutTemplate,
         
         render: function(){
             this.el = this.template({id:Math.random()});            
         }
     });
-    return HomeView;
+    return MainLayout;
 });
