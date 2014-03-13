@@ -11,6 +11,7 @@ import models.Hierarchy;
 import play.mvc.Controller;
 import play.mvc.Http.MultipartFormData;
 import play.mvc.Result;
+import play.mvc.Security;
 
 import com.cerrid.model.collections.DataMart;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -19,31 +20,15 @@ import com.google.gson.GsonBuilder;
 
 import filters.ApplicationServices;
 
+@Security.Authenticated(Secured.class)
 public class AppController extends Controller {
-	
-	public static Result authentiate() {
-		
-		System.out.println("authentiate");
-		JsonNode asJson = request().body().asJson();
-		
-		boolean isAuthenticate=ApplicationServices.loginValidation(asJson);
-		
-		if(isAuthenticate)
-			return ok("{\"status\":\"home\",\"message\":\"Welcome\"}");
-		else
-			return ok("{\"status\":\"error\",\"message\":\"Invalid UserName and Password\"}");
-		
-		
-	}
-	
+
 	public static Result details() {
 		String dataTableData = null;
 		Map<String,String[]>  data=request().body().asFormUrlEncoded();
 		
 		try {
-			
 			String tablecolumns=data.get("datacolumns")[0];
-			
 			System.out.println("columns"+tablecolumns);
 			//52d786eb44ae1f357323d228
 			

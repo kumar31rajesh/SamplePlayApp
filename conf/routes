@@ -8,7 +8,7 @@ GET     /                           controllers.Assets.at(path="/public", file="
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
 
 # application routes
-POST /api/authenticate     controllers.AppController.authentiate()
+POST /api/authenticate     controllers.HomeController.authentiate()
 POST /api/validateAdmin     controllers.AppController.validateAdmin()
 POST /api/saveUser     controllers.AppController.saveUserDetails()
 POST  /api/details     	   controllers.AppController.details()

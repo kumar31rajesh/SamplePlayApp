@@ -9,7 +9,6 @@ import com.mongodb.Mongo;
 import controllers.MorphiaObject;
 
 public class Global extends GlobalSettings {
-
         @Override
         public void onStart(play.Application arg0) {
                 super.beforeStart(arg0);
@@ -27,4 +26,16 @@ public class Global extends GlobalSettings {
 
                 Logger.debug("** Morphia datastore: " + MorphiaObject.datastore.getDB());
         }
+
+	/*
+	 * @SuppressWarnings("rawtypes")
+	 * 
+	 * @Override public play.mvc.Action onRequest(play.mvc.Http.Request request,
+	 * Method actionMethod) { String username =
+	 * request.cookie("username").value(); if (username != null &&
+	 * !username.isEmpty()) { return super.onRequest(request, actionMethod); }
+	 * else { return null;// redirect("/home"); }
+	 * 
+	 * }
+	 */
 }
