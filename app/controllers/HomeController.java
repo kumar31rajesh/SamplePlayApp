@@ -21,15 +21,15 @@ public class HomeController extends Controller {
 		System.out.println("authentiate");
 		JsonNode asJson = request().body().asJson();
 
-		boolean isAuthenticate = ApplicationServices.loginValidation(asJson);
+/*		boolean isAuthenticate = ApplicationServices.loginValidation(asJson);
 
 		if (isAuthenticate) {
 			session("username", "amit@cerridsolutions.com");
-			response().setCookie("username", "amit@cerridsolutions.com");
+			response().setCookie("username", "amit@cerridsolutions.com");*/
 			return ok("{\"status\":\"home\",\"message\":\"Welcome\"}");
 			// return ok("{\"status\":\"home\",\"message\":\"Welcome\"}");
-		} else
-			return ok("{\"status\":\"error\",\"message\":\"Invalid UserName and Password\"}");
+		/*} else
+			return ok("{\"status\":\"error\",\"message\":\"Invalid UserName and Password\"}");*/
 
 	}
 }
